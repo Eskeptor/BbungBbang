@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{718B49EA-01CD-4023-863A-FA730C46968D}</ProjectGuid>
+    <ProjectGuid>{9205DE60-7B4A-41B0-A9AB-44AE25BE87EB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>BbungBbang</RootNamespace>
-    <AssemblyName>BbungBbang</AssemblyName>
+    <RootNamespace>BbungBbangAssist</RootNamespace>
+    <AssemblyName>BbungBbangAssist</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -72,12 +72,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TabMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TabMain.Designer.cs">
-      <DependentUpon>TabMain.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,9 +87,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="TabMain.resx">
-      <DependentUpon>TabMain.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -109,6 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BbungBbangCrypt\BbungBbangCrypt\BbungBbangCrypt.csproj">
+      <Project>{c951b1fb-6f31-4400-9525-82f1fb843367}</Project>
+      <Name>BbungBbangCrypt</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

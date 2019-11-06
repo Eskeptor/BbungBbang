@@ -9,6 +9,7 @@ namespace BbungBbang
     public class Global
     {
         public static string APP_KEY_FORM_NAME = "FormName";
+        public static string PATH_USER_FOLDER = "User";
 
         public enum Page
         {
