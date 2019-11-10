@@ -57,6 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfigMgr.cs" />
+    <Compile Include="ConfirmDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmDlg.Designer.cs">
+      <DependentUpon>ConfirmDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,19 +70,19 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="LoginDlg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="LoginDlg.Designer.cs">
+      <DependentUpon>LoginDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="LoginDlg.resx">
+      <DependentUpon>LoginDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,6 +92,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -105,6 +112,10 @@
     <ProjectReference Include="..\..\BbungBbangCrypt\BbungBbangCrypt\BbungBbangCrypt.csproj">
       <Project>{c951b1fb-6f31-4400-9525-82f1fb843367}</Project>
       <Name>BbungBbangCrypt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BbungBbangXml\BbungBbangXml\BbungBbangXml.csproj">
+      <Project>{15070880-8729-4805-8bbb-6dc6417bb991}</Project>
+      <Name>BbungBbangXml</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
