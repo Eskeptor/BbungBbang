@@ -6,7 +6,7 @@
  1) 작성중...
  2) C# (.NET Framework 4.7.2)
 ```
-## What's New? (Last updated 2019.11.10) - None Build
+## 업데이트 (2019.11.10) - None Build
 ```
  1) BbungBbangAssist -> BbungBbangXml 추가
  2) BbungBbangAssist 리소스 생성
@@ -26,6 +26,12 @@
 ## License
 Copyright 2019 Jeon Ye-Chan(Eskeptor)
 
+Licensed under the GNU GENERAL PUBLIC LICENSE, Version 3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+```
+https://www.gnu.org/licenses/gpl-3.0.html
+```
 Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
 ## Good Bye!!
