@@ -14,6 +14,7 @@
  3) BbungBbang -> BbungBbangXml 추가
  4) BbungBbang -> BbungBbangCrypt 추가
  5) BbungBbang -> BbungBbangLog 추가
+ 6) Icon 추가 (Copyright by Raeryori)
 ```
 ## 지난 업데이트 기록
 [기록 보기](./UPDATE.md)
@@ -37,6 +38,9 @@ You may obtain a copy of the License at
 https://www.gnu.org/licenses/gpl-3.0.html
 ```
 Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
+
+## Logo(Icon) License
+Copyright 2019 Raeryori(https://blog.naver.com/0120qwe)
 
 ## Good Bye!!
 Compiled by Visual Studio 2019 Community 16.3.4
