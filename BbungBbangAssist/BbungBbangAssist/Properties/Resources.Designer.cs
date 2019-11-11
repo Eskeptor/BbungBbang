@@ -61,6 +61,96 @@ namespace BbungBbangAssist.Properties {
         }
         
         /// <summary>
+        ///   취소과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Btn_Cancel {
+            get {
+                return ResourceManager.GetString("String_Confirm_Btn_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   아니오과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Btn_No {
+            get {
+                return ResourceManager.GetString("String_Confirm_Btn_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확인과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Btn_OK {
+            get {
+                return ResourceManager.GetString("String_Confirm_Btn_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   예과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Btn_Yes {
+            get {
+                return ResourceManager.GetString("String_Confirm_Btn_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정 생성과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Create_Title {
+            get {
+                return ResourceManager.GetString("String_Confirm_Create_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정 삭제과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Delete_Title {
+            get {
+                return ResourceManager.GetString("String_Confirm_Delete_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정을 삭제하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_DeleteOK {
+            get {
+                return ResourceManager.GetString("String_Confirm_DeleteOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정 수정과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Modify_Title {
+            get {
+                return ResourceManager.GetString("String_Confirm_Modify_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호가 일치하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_Msg_IncorrectPW {
+            get {
+                return ResourceManager.GetString("String_Confirm_Msg_IncorrectPW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호를 한 번 더 입력하세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Confirm_PasswdOneMore {
+            get {
+                return ResourceManager.GetString("String_Confirm_PasswdOneMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   로그인과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_Login_Btn {
@@ -151,11 +241,47 @@ namespace BbungBbangAssist.Properties {
         }
         
         /// <summary>
+        ///   계정명이 비어있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Main_Msg_NoneID {
+            get {
+                return ResourceManager.GetString("String_Main_Msg_NoneID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호가 비어있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Main_Msg_NonePW {
+            get {
+                return ResourceManager.GetString("String_Main_Msg_NonePW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   경고과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Main_Msg_Warning {
+            get {
+                return ResourceManager.GetString("String_Main_Msg_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   계정 관리과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_Main_Title {
             get {
                 return ResourceManager.GetString("String_Main_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
     }

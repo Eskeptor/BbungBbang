@@ -12,7 +12,7 @@ namespace BbungBbang
 {
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        TabMain mTabMain = null;
+        TabMain m_tabMain = null;
 
         public Form1()
         {
@@ -44,14 +44,14 @@ namespace BbungBbang
 
         private void InitTab()
         {
-            mTabMain = new TabMain();
-            mTabMain.DelegatePage += new TabMain.DelegateChangePage(ChangeTabPage);
-            mTabMain.TopLevel = false;
-            mTabMain.TopMost = true;
-            mTabMain.Location = new Point(0, 0);
+            m_tabMain = new TabMain();
+            m_tabMain.DelegatePage += new TabMain.DelegateChangePage(ChangeTabPage);
+            m_tabMain.TopLevel = false;
+            m_tabMain.TopMost = true;
+            m_tabMain.Location = new Point(0, 0);
             mainTabMain.Controls.Clear();
-            mainTabMain.Controls.Add(mTabMain);
-            mTabMain.Show();
+            mainTabMain.Controls.Add(m_tabMain);
+            m_tabMain.Show();
 
             mainTab.SelectedTab = mainTabMain;
         }
@@ -75,7 +75,7 @@ namespace BbungBbang
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mTabMain.Dispose();
+            m_tabMain.Dispose();
         }
     }
 }

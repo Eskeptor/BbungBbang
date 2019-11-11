@@ -15,8 +15,8 @@ namespace BbungBbangAssist
 {
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        LoginDlg mLoginDlg = null;
-        List<string> mList = null;
+        LoginDlg m_dlgLogin = null;
+        List<string> m_listAccount = null;
 
         public Form1()
         {
@@ -44,8 +44,8 @@ namespace BbungBbangAssist
 
             // ==================================================================
             // 로그인 목록으로부터 데이터를 불러와 콤보박스에 넣어줌
-            mList = new List<string>();
-            int nResult = XmlMgr.LoadAccount(ref mList);
+            m_listAccount = new List<string>();
+            int nResult = XmlMgr.LoadAccount(ref m_listAccount);
             if (nResult == (int)XmlMgr.LoadResult.Success)
             {
 
@@ -54,17 +54,32 @@ namespace BbungBbangAssist
 
 
             // ==================================================================
-            mLoginDlg = new LoginDlg();
-            mLoginDlg.SetParent(this);
-            mLoginDlg.ShowDialog();
+            m_dlgLogin = new LoginDlg();
+            m_dlgLogin.SetParent(this);
+            m_dlgLogin.ShowDialog();
             Hide();
             // ==================================================================
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (mLoginDlg != null)
-                mLoginDlg.Dispose();
+            if (m_dlgLogin != null)
+                m_dlgLogin.Dispose();
+        }
+
+        private void mainBtnCreate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(mainEditID.Text))
+            {
+                MessageBox.Show(Properties.Resources.String_Main_Msg_NoneID, Properties.Resources.String_Main_Msg_Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(mainEditPasswd.Text))
+            {
+                MessageBox.Show(Properties.Resources.String_Main_Msg_NonePW, Properties.Resources.String_Main_Msg_Warning);
+                return;
+            }
         }
     }
 }

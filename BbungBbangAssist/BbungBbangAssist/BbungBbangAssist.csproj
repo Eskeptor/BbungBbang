@@ -78,6 +78,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ConfirmDlg.resx">
+      <DependentUpon>ConfirmDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +115,10 @@
     <ProjectReference Include="..\..\BbungBbangCrypt\BbungBbangCrypt\BbungBbangCrypt.csproj">
       <Project>{c951b1fb-6f31-4400-9525-82f1fb843367}</Project>
       <Name>BbungBbangCrypt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BbungBbangLog\BbungBbangLog\BbungBbangLog.csproj">
+      <Project>{b12a81b6-7eab-4c36-8ce4-46560a6ffa7a}</Project>
+      <Name>BbungBbangLog</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\BbungBbangXml\BbungBbangXml\BbungBbangXml.csproj">
       <Project>{15070880-8729-4805-8bbb-6dc6417bb991}</Project>

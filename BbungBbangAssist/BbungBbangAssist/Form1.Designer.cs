@@ -31,6 +31,7 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("테스트1");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("테스트2");
             this.mainList = new MetroFramework.Controls.MetroListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mainLblList = new MetroFramework.Controls.MetroLabel();
             this.mainLblID = new MetroFramework.Controls.MetroLabel();
             this.mainEditID = new MetroFramework.Controls.MetroTextBox();
@@ -40,7 +41,6 @@
             this.mainBtnCreate = new MetroFramework.Controls.MetroButton();
             this.mainBtnDelete = new MetroFramework.Controls.MetroButton();
             this.mainBtnEdit = new MetroFramework.Controls.MetroButton();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // mainList
@@ -61,6 +61,11 @@
             this.mainList.UseCompatibleStateImageBehavior = false;
             this.mainList.UseSelectable = true;
             this.mainList.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "계정명";
+            this.columnHeader1.Width = 303;
             // 
             // mainLblList
             // 
@@ -171,6 +176,7 @@
             this.mainBtnCreate.TabIndex = 7;
             this.mainBtnCreate.Text = "생성";
             this.mainBtnCreate.UseSelectable = true;
+            this.mainBtnCreate.Click += new System.EventHandler(this.mainBtnCreate_Click);
             // 
             // mainBtnDelete
             // 
@@ -191,11 +197,6 @@
             this.mainBtnEdit.TabIndex = 9;
             this.mainBtnEdit.Text = "수정";
             this.mainBtnEdit.UseSelectable = true;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "계정명";
-            this.columnHeader1.Width = 303;
             // 
             // Form1
             // 
