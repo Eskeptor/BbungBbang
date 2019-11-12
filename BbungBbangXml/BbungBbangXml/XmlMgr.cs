@@ -36,16 +36,32 @@ namespace BbungBbangXml
         {
             int nResult = (int)LoadResult.NoData;
             string strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + LOGIN_FILE;
-            XmlDocument xml = new XmlDocument();
+
             try
             {
-                xml.Load(strPath);
-
-                XmlNodeList xmlRootNode = xml.SelectNodes(XML_ROOT);
-                foreach (XmlNode xmlAccNode in xmlRootNode)
+                using (XmlReader reader = XmlReader.Create(strPath))
                 {
-                    listAccount.Add(xmlAccNode[XML_SUB_ID].InnerText);
-                    listAccount.Add(xmlAccNode[XML_SUB_PW].InnerText);
+                    if (listAccount.Count > 0)
+                        listAccount.Clear();
+
+                    while (reader.Read())
+                    {
+                        if (reader.Name.CompareTo(XML_SUB) == 0 &&
+                            reader.NodeType == XmlNodeType.Element)
+                        {
+                            if (reader.MoveToFirstAttribute())
+                            {
+                                if (reader.Name.CompareTo(XML_SUB_ID) == 0)
+                                    listAccount.Add(reader.Value);
+
+                                if (reader.MoveToNextAttribute())
+                                {
+                                    if (reader.Name.CompareTo(XML_SUB_PW) == 0)
+                                        listAccount.Add(reader.Value);
+                                }
+                            }
+                        }
+                    }
                 }
 
                 if (listAccount.Count > 0)
@@ -53,7 +69,7 @@ namespace BbungBbangXml
                 else
                     nResult = (int)LoadResult.NoData;
             }
-            catch 
+            catch
             {
                 nResult = (int)LoadResult.Fail_FileLoad;
             }
@@ -71,25 +87,27 @@ namespace BbungBbangXml
         {
             bool bResult = false;
             string strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + LOGIN_FILE;
-            XmlDocument xml = new XmlDocument();
+
             try
             {
-                XmlNode xmlRootNode = xml.CreateElement(XML_ROOT);
-                int nSize = listAccount.Count / 2;
-
-                for (int i = 0; i < nSize; i++)
+                using (XmlWriter writer = XmlWriter.Create(strPath))
                 {
-                    XmlNode xmlAccNode = xml.CreateElement(XML_SUB);
-                    XmlNode xmlAccNodeID = xml.CreateElement(XML_SUB_ID);
-                    XmlNode xmlAccNodePW = xml.CreateElement(XML_SUB_PW);
+                    int nSize = listAccount.Count / 2;
 
-                    xmlAccNodeID.InnerText = listAccount[i * 2];
-                    xmlAccNodePW.InnerText = listAccount[i * 2 + 1];
-                    xmlAccNode.AppendChild(xmlAccNodeID);
-                    xmlAccNode.AppendChild(xmlAccNodePW);
-                    xml.AppendChild(xmlAccNode);
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement(XML_ROOT);
+
+                    for (int i = 0; i < nSize; i++)
+                    {
+                        writer.WriteStartElement(XML_SUB);
+                        writer.WriteAttributeString(XML_SUB_ID, listAccount[i * 2]);
+                        writer.WriteAttributeString(XML_SUB_PW, listAccount[i * 2 + 1]);
+                        writer.WriteEndElement();
+                    }
+
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
                 }
-                xml.Save(strPath);
             }
             catch
             {

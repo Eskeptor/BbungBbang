@@ -6,15 +6,11 @@
  1) 작성중...
  2) C# Winform (.NET Framework 4.7.2)
 ```
-## 업데이트 (2019.11.11) - None Build
+## 업데이트 (2019.11.12) - None Build
 ```
- 1) BbungBbangAssist -> BbungBbangLog 추가
- 2) BbungBbangAssist -> BbungBbangXml 기능추가
-                        (SaveAccount, LoadAccount 기능 테스트 필요)
- 3) BbungBbang -> BbungBbangXml 추가
- 4) BbungBbang -> BbungBbangCrypt 추가
- 5) BbungBbang -> BbungBbangLog 추가
- 6) Icon 추가 (Copyright by Raeryori)
+ 1) BbungBbangAssist -> BbungBbangXml 기능 업데이트
+                        (SaveAccount, LoadAccount 기능 확인완료)
+ 2) BbungBbangAssist -> 계정 추가, 계정 삭제, 메인 리스트 연결 완료
 ```
 ## 지난 업데이트 기록
 [기록 보기](./UPDATE.md)

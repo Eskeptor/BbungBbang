@@ -42,21 +42,21 @@ namespace BbungBbangAssist
                 case ConfirmDlgType.Create:
                     this.Text = Properties.Resources.String_Confirm_Create_Title;
                     confirmLblText.Text = Properties.Resources.String_Confirm_PasswdOneMore;
-                    confirmEditPasswd.Enabled = true;
+                    confirmEditPasswd.Visible = true;
                     confirmBtnOK.Text = Properties.Resources.String_Confirm_Btn_OK;
                     confirmBtnCancel.Text = Properties.Resources.String_Confirm_Btn_Cancel;
                     break;
                 case ConfirmDlgType.Modify:
                     this.Text = Properties.Resources.String_Confirm_Modify_Title;
                     confirmLblText.Text = Properties.Resources.String_Confirm_PasswdOneMore;
-                    confirmEditPasswd.Enabled = true;
+                    confirmEditPasswd.Visible = true;
                     confirmBtnOK.Text = Properties.Resources.String_Confirm_Btn_OK;
                     confirmBtnCancel.Text = Properties.Resources.String_Confirm_Btn_Cancel;
                     break;
                 case ConfirmDlgType.Delete:
                     this.Text = Properties.Resources.String_Confirm_Delete_Title;
                     confirmLblText.Text = Properties.Resources.String_Confirm_DeleteOK;
-                    confirmEditPasswd.Enabled = false;
+                    confirmEditPasswd.Visible = false;
                     confirmBtnOK.Text = Properties.Resources.String_Confirm_Btn_Yes;
                     confirmBtnCancel.Text = Properties.Resources.String_Confirm_Btn_No;
                     break;
@@ -70,6 +70,7 @@ namespace BbungBbangAssist
         public void SetConfirmDlgType(ConfirmDlgType dlgType)
         {
             m_eDlgType = dlgType;
+            InitControls();
         }
 
         /// <summary>
@@ -80,8 +81,29 @@ namespace BbungBbangAssist
         {
             m_strConfirmPasswd = strPasswd;
         }
-        
+
         private void confirmBtnOK_Click(object sender, EventArgs e)
+        {
+            switch (m_eDlgType)
+            {
+                case ConfirmDlgType.Create:
+                    CreateActionOK();
+                    break;
+                case ConfirmDlgType.Modify:
+
+                    break;
+                case ConfirmDlgType.Delete:
+                    DeleteActionOK();
+                    break;
+            }
+        }
+
+        private void confirmBtnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void CreateActionOK()
         {
             if (string.IsNullOrEmpty(confirmEditPasswd.Text))
             {
@@ -95,7 +117,17 @@ namespace BbungBbangAssist
                 return;
             }
 
-            // Confirm 다이얼로그 띄우기
+            if (m_strConfirmPasswd.CompareTo(confirmEditPasswd.Text) == 0)
+            {
+                this.DialogResult = DialogResult.OK;
+                Close();
+            }
+        }
+
+        private void DeleteActionOK()
+        {
+            this.DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using BbungBbangXml;
+using BbungBbangCrypt;
 
 namespace BbungBbangAssist
 {
@@ -27,6 +28,9 @@ namespace BbungBbangAssist
             
         }
 
+        /// <summary>
+        /// 컨트롤 초기화 메소드
+        /// </summary>
         private void InitControls()
         {
             // ==================================================================
@@ -48,8 +52,15 @@ namespace BbungBbangAssist
             int nResult = XmlMgr.LoadAccount(ref m_listAccount);
             if (nResult == (int)XmlMgr.LoadResult.Success)
             {
-
+                ResetList();
             }
+            // ==================================================================
+
+
+            // ==================================================================
+            // 버튼 상태 변경
+            mainBtnEdit.Enabled = false;
+            mainBtnDelete.Enabled = false;
             // ==================================================================
 
 
@@ -61,12 +72,36 @@ namespace BbungBbangAssist
             // ==================================================================
         }
 
+        private void ResetList()
+        {
+            int nSize = m_listAccount.Count / 2;
+
+            mainList.Items.Clear();
+            mainList.BeginUpdate();
+            for (int i = 0; i < nSize; i++)
+            {
+                ListViewItem listViewItem = new ListViewItem(m_listAccount[i * 2]);
+                mainList.Items.Add(listViewItem);
+            }
+            mainList.EndUpdate();
+        }
+
+        /// <summary>
+        /// 폼 종료시 수행
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (m_dlgLogin != null)
                 m_dlgLogin.Dispose();
         }
 
+        /// <summary>
+        /// 생성 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mainBtnCreate_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(mainEditID.Text))
@@ -79,6 +114,64 @@ namespace BbungBbangAssist
             {
                 MessageBox.Show(Properties.Resources.String_Main_Msg_NonePW, Properties.Resources.String_Main_Msg_Warning);
                 return;
+            }
+
+            using (ConfirmDlg confirmDlg = new ConfirmDlg())
+            {
+                confirmDlg.SetConfirmDlgType(ConfirmDlg.ConfirmDlgType.Create);
+                confirmDlg.SetConfirmPassword(mainEditPasswd.Text);
+
+                DialogResult dialogResult = confirmDlg.ShowDialog();
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    string strCryptPW = Crypto.Encrypt(mainEditPasswd.Text);
+                    m_listAccount.Add(mainEditID.Text);
+                    m_listAccount.Add(strCryptPW);
+                    XmlMgr.SaveAccount(m_listAccount);
+
+                    mainEditID.Clear();
+                    mainEditPasswd.Clear();
+
+                    ResetList();
+                }
+            }
+        }
+
+        private void mainList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            try
+            {
+                int nCurSelIdx = mainList.SelectedItems[0].Index;
+
+                mainEditID.Text = m_listAccount[nCurSelIdx * 2];
+
+                mainBtnEdit.Enabled = true;
+                mainBtnDelete.Enabled = true;
+            }
+            catch (Exception)
+            {
+                mainBtnEdit.Enabled = false;
+                mainBtnDelete.Enabled = false;
+            }
+        }
+
+        private void mainBtnDelete_Click(object sender, EventArgs e)
+        {
+            using (ConfirmDlg confirmDlg = new ConfirmDlg())
+            {
+                confirmDlg.SetConfirmDlgType(ConfirmDlg.ConfirmDlgType.Delete);
+
+                DialogResult dialogResult = confirmDlg.ShowDialog();
+
+                if (dialogResult == DialogResult.OK)
+                {
+                    int nCurSelIdx = mainList.SelectedItems[0].Index;
+
+                    m_listAccount.RemoveRange(nCurSelIdx, 2);
+                    XmlMgr.SaveAccount(m_listAccount); 
+                    ResetList();
+                }
             }
         }
     }

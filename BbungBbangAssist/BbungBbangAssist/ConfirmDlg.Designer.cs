@@ -57,8 +57,7 @@
             this.confirmEditPasswd.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.confirmEditPasswd.CustomButton.UseSelectable = true;
             this.confirmEditPasswd.CustomButton.Visible = false;
-            this.confirmEditPasswd.Lines = new string[] {
-        "confirmEditPasswd"};
+            this.confirmEditPasswd.Lines = new string[0];
             this.confirmEditPasswd.Location = new System.Drawing.Point(23, 92);
             this.confirmEditPasswd.MaxLength = 32767;
             this.confirmEditPasswd.Name = "confirmEditPasswd";
@@ -70,7 +69,6 @@
             this.confirmEditPasswd.ShortcutsEnabled = true;
             this.confirmEditPasswd.Size = new System.Drawing.Size(293, 23);
             this.confirmEditPasswd.TabIndex = 1;
-            this.confirmEditPasswd.Text = "confirmEditPasswd";
             this.confirmEditPasswd.UseSelectable = true;
             this.confirmEditPasswd.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.confirmEditPasswd.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -93,6 +91,7 @@
             this.confirmBtnCancel.TabIndex = 3;
             this.confirmBtnCancel.Text = "confirmBtnCancel";
             this.confirmBtnCancel.UseSelectable = true;
+            this.confirmBtnCancel.Click += new System.EventHandler(this.confirmBtnCancel_Click);
             // 
             // ConfirmDlg
             // 

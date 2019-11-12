@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("테스트1");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("테스트2");
             this.mainList = new MetroFramework.Controls.MetroListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mainLblList = new MetroFramework.Controls.MetroLabel();
@@ -49,9 +47,6 @@
             this.columnHeader1});
             this.mainList.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.mainList.FullRowSelect = true;
-            this.mainList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
             this.mainList.Location = new System.Drawing.Point(23, 118);
             this.mainList.MultiSelect = false;
             this.mainList.Name = "mainList";
@@ -61,6 +56,7 @@
             this.mainList.UseCompatibleStateImageBehavior = false;
             this.mainList.UseSelectable = true;
             this.mainList.View = System.Windows.Forms.View.Details;
+            this.mainList.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.mainList_ItemSelectionChanged);
             // 
             // columnHeader1
             // 
@@ -135,7 +131,7 @@
             this.mainEditPasswd.Location = new System.Drawing.Point(440, 156);
             this.mainEditPasswd.MaxLength = 32767;
             this.mainEditPasswd.Name = "mainEditPasswd";
-            this.mainEditPasswd.PasswordChar = '\0';
+            this.mainEditPasswd.PasswordChar = '*';
             this.mainEditPasswd.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.mainEditPasswd.SelectedText = "";
             this.mainEditPasswd.SelectionLength = 0;
@@ -187,6 +183,7 @@
             this.mainBtnDelete.TabIndex = 8;
             this.mainBtnDelete.Text = "삭제";
             this.mainBtnDelete.UseSelectable = true;
+            this.mainBtnDelete.Click += new System.EventHandler(this.mainBtnDelete_Click);
             // 
             // mainBtnEdit
             // 
