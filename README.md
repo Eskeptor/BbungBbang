@@ -6,11 +6,10 @@
  1) 작성중...
  2) C# Winform (.NET Framework 4.7.2)
 ```
-## 업데이트 (2019.11.12) - None Build
+## 업데이트 (2019.11.15) - None Build
 ```
- 1) BbungBbangAssist -> BbungBbangXml 기능 업데이트
-                        (SaveAccount, LoadAccount 기능 확인완료)
- 2) BbungBbangAssist -> 계정 추가, 계정 삭제, 메인 리스트 연결 완료
+ 1) BbungBbangAssist -> 프로그램 완성
+ 2) BbungBbangAssist -> 로그 기록 추가중
 ```
 ## 지난 업데이트 기록
 [기록 보기](./UPDATE.md)
@@ -21,7 +20,7 @@
  CPU : AMD Ryzen R5 3600
  RAM : 32GB
  VGA : AMD Radeon RX 5700 XT
- IDE : Visual Studio 2019 Community 16.3.4
+ IDE : Visual Studio 2019 Community 16.3.9
 ```
 
 ## License
@@ -39,4 +38,4 @@ Permissions of this strong copyleft license are conditioned on making available 
 Copyright 2019 Raeryori(https://blog.naver.com/0120qwe)
 
 ## Good Bye!!
-Compiled by Visual Studio 2019 Community 16.3.4
+Compiled by Visual Studio 2019 Community 16.3.9

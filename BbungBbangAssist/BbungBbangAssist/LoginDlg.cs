@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BbungBbangCrypt;
+using BbungBbangLog;
+using System;
 using System.Windows.Forms;
-using BbungBbangCrypt;
 
 namespace BbungBbangAssist
 {
@@ -20,7 +14,7 @@ namespace BbungBbangAssist
         public LoginDlg()
         {
             InitializeComponent();
-            //SetDefaultPass();
+            SetDefaultPass();
             InitControls();
         }
 
@@ -48,31 +42,63 @@ namespace BbungBbangAssist
         /// </summary>
         private void SetDefaultPass()
         {
-            string strPass = Crypto.Encrypt(Global.DEFAULT_PASS);
-            AppConfigMgr.SetAppConfig(Global.APP_KEY_ADMIN_PASS, strPass);
+            if (string.IsNullOrEmpty(AppConfigMgr.GetAppConfig(Global.APP_KEY_ADMIN_PASS)))
+            {
+                LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 계정 초기화(계정 정보 사라짐)");
+
+                string strPass = Crypto.Encrypt(Global.DEFAULT_PASS);
+                AppConfigMgr.SetAppConfig(Global.APP_KEY_ADMIN_PASS, strPass);
+            }
         }
 
-
+        /// <summary>
+        /// 로그인 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void metroButton1_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인(버튼 클릭)");
+
             string encrypt = Crypto.Encrypt(loginTxtPass.Text);
             if (encrypt.Equals(AppConfigMgr.GetAppConfig(Global.APP_KEY_ADMIN_PASS)))
             {
                 if (m_dlgParent != null)
                 {
+                    LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인 성공");
                     m_dlgParent.Show();
                     m_bIsLogin = true;
                     Hide();
                 }
             }
+            else
+                LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인 실패");
         }
 
+        /// <summary>
+        /// 폼이 종료될 때 발생하는 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (m_bIsLogin == false)
             {
+                LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인폼 종료(프로그램 종료)");
                 Application.Exit();
             }
+            else
+                LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인폼 종료(폼 종료)");
+        }
+
+        /// <summary>
+        /// 로그인폼이 Show 되었을 때 발생하는 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoginDlg_Shown(object sender, EventArgs e)
+        {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인폼 생성");
         }
     }
 }

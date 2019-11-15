@@ -1,3 +1,9 @@
+## Update 2019.11.15 - None Build
+```
+ 1) BbungBbangAssist -> 프로그램 완성
+ 2) BbungBbangAssist -> 로그 기록 추가중
+```
+
 ## Update 2019.11.12 - None Build
 ```
  1) BbungBbangAssist -> BbungBbangXml 기능 업데이트

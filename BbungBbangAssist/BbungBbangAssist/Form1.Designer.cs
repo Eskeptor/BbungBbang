@@ -194,6 +194,7 @@
             this.mainBtnEdit.TabIndex = 9;
             this.mainBtnEdit.Text = "수정";
             this.mainBtnEdit.UseSelectable = true;
+            this.mainBtnEdit.Click += new System.EventHandler(this.mainBtnEdit_Click);
             // 
             // Form1
             // 
@@ -215,6 +216,7 @@
             this.Resizable = false;
             this.Text = "계정 관리";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

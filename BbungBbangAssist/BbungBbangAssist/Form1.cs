@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
+﻿using BbungBbangCrypt;
 using BbungBbangXml;
-using BbungBbangCrypt;
+using BbungBbangLog;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace BbungBbangAssist
 {
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        LoginDlg m_dlgLogin = null;
-        List<string> m_listAccount = null;
+        private LoginDlg m_dlgLogin = null;                 // 로그인 다이얼로그
+        private List<string> m_listAccount = null;          // 계정 리스트
+
+        private string m_strReceiveData = string.Empty;     // 다른 폼으로부터 받은 데이터
 
         public Form1()
         {
@@ -25,7 +20,7 @@ namespace BbungBbangAssist
 
             InitControls();
 
-            
+
         }
 
         /// <summary>
@@ -72,6 +67,10 @@ namespace BbungBbangAssist
             // ==================================================================
         }
 
+        /// <summary>
+        /// 메인 리스트를 초기화하는 메소드
+        /// m_listAccount의 내용으로 다시 채워넣는다.
+        /// </summary>
         private void ResetList()
         {
             int nSize = m_listAccount.Count / 2;
@@ -84,6 +83,16 @@ namespace BbungBbangAssist
                 mainList.Items.Add(listViewItem);
             }
             mainList.EndUpdate();
+        }
+
+        /// <summary>
+        /// 다른 폼으로터 데이터를 받는 메소드
+        /// 받은 데이터는 m_strReceiveData에 저장됨
+        /// </summary>
+        /// <param name="strData">데이터</param>
+        public void SetReceiveData(string strData)
+        {
+            m_strReceiveData = strData;
         }
 
         /// <summary>
@@ -107,13 +116,25 @@ namespace BbungBbangAssist
             if (string.IsNullOrEmpty(mainEditID.Text))
             {
                 MessageBox.Show(Properties.Resources.String_Main_Msg_NoneID, Properties.Resources.String_Main_Msg_Warning);
+                mainEditID.Focus();
                 return;
             }
 
             if (string.IsNullOrEmpty(mainEditPasswd.Text))
             {
                 MessageBox.Show(Properties.Resources.String_Main_Msg_NonePW, Properties.Resources.String_Main_Msg_Warning);
+                mainEditPasswd.Focus();
                 return;
+            }
+
+            foreach (string strID in m_listAccount)
+            {
+                if (strID.CompareTo(mainEditID.Text) == 0)
+                {
+                    MessageBox.Show(Properties.Resources.String_Main_Msg_SameID, Properties.Resources.String_Main_Msg_Warning);
+                    mainEditID.Focus();
+                    return;
+                }
             }
 
             using (ConfirmDlg confirmDlg = new ConfirmDlg())
@@ -138,6 +159,11 @@ namespace BbungBbangAssist
             }
         }
 
+        /// <summary>
+        /// 메인 리스트 - 선택 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mainList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             try
@@ -156,8 +182,15 @@ namespace BbungBbangAssist
             }
         }
 
+        /// <summary>
+        /// 삭제 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mainBtnDelete_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "메인 - 삭제(버튼 클릭)");
+
             using (ConfirmDlg confirmDlg = new ConfirmDlg())
             {
                 confirmDlg.SetConfirmDlgType(ConfirmDlg.ConfirmDlgType.Delete);
@@ -167,12 +200,64 @@ namespace BbungBbangAssist
                 if (dialogResult == DialogResult.OK)
                 {
                     int nCurSelIdx = mainList.SelectedItems[0].Index;
+                    string strDelID = m_listAccount[nCurSelIdx];
 
                     m_listAccount.RemoveRange(nCurSelIdx, 2);
-                    XmlMgr.SaveAccount(m_listAccount); 
+                    XmlMgr.SaveAccount(m_listAccount);
                     ResetList();
+
+                    string strLog = string.Format("메인 - 삭제 완료(ID: {0}", strDelID);
+                    LogMgr.WriteLog(LogMgr.LogType.GUI, strLog);
                 }
             }
+        }
+
+        /// <summary>
+        /// 수정 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainBtnEdit_Click(object sender, EventArgs e)
+        {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "메인 - 수정(버튼 클릭)");
+
+            using (ModifyDlg modifyDlg = new ModifyDlg())
+            {
+                int nCurSel = mainList.SelectedItems[0].Index * 2;
+                modifyDlg.SetMainForm(this);
+                modifyDlg.SetTargetInfo(m_listAccount[nCurSel], nCurSel, m_listAccount[nCurSel + 1]);
+
+                DialogResult dialogResult = modifyDlg.ShowDialog();
+
+                if (dialogResult == DialogResult.OK &&
+                    string.IsNullOrEmpty(m_strReceiveData) == false)
+                {
+                    string[] arrStrData = m_strReceiveData.Split(',');
+                    if (arrStrData.Length == 3)
+                    {
+                        int nIdx = int.Parse(arrStrData[0]);
+                        m_listAccount[nIdx] = arrStrData[1];
+                        m_listAccount[nIdx + 1] = arrStrData[2];
+                        m_strReceiveData = string.Empty;
+
+                        XmlMgr.SaveAccount(m_listAccount);
+                        ResetList();
+
+                        string strLog = string.Format("메인 - 수정 완료(ID: {0}", arrStrData[1]);
+                        LogMgr.WriteLog(LogMgr.LogType.GUI, strLog);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 메인 폼이 Show 되었을 시 발생하는 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "메인 - 메인폼 생성");
         }
     }
 }

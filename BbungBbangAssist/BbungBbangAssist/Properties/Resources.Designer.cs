@@ -259,6 +259,15 @@ namespace BbungBbangAssist.Properties {
         }
         
         /// <summary>
+        ///   동일한 계정명이 이미 존재합니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Main_Msg_SameID {
+            get {
+                return ResourceManager.GetString("String_Main_Msg_SameID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   경고과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_Main_Msg_Warning {
@@ -277,11 +286,110 @@ namespace BbungBbangAssist.Properties {
         }
         
         /// <summary>
-        ///   과(와) 유사한 지역화된 문자열을 찾습니다.
+        ///   취소과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
-        internal static string String1 {
+        internal static string String_Modify_Btn_Cancel {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("String_Modify_Btn_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   수정과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Btn_OK {
+            get {
+                return ResourceManager.GetString("String_Modify_Btn_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정명과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_ID {
+            get {
+                return ResourceManager.GetString("String_Modify_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   기존 비밀번호를 확인하세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Msg_IncorrectPrevPW {
+            get {
+                return ResourceManager.GetString("String_Modify_Msg_IncorrectPrevPW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   새 비밀번호가 일치하지 않습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Msg_IncorrectPW {
+            get {
+                return ResourceManager.GetString("String_Modify_Msg_IncorrectPW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정명이 비어있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Msg_NoneID {
+            get {
+                return ResourceManager.GetString("String_Modify_Msg_NoneID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호가 비어있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Msg_NonePW {
+            get {
+                return ResourceManager.GetString("String_Modify_Msg_NonePW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호를 한 번 더 입력하세요.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Msg_NonePW2 {
+            get {
+                return ResourceManager.GetString("String_Modify_Msg_NonePW2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   기존 비밀번호과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Prev_PW {
+            get {
+                return ResourceManager.GetString("String_Modify_Prev_PW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_PW {
+            get {
+                return ResourceManager.GetString("String_Modify_PW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   비밀번호확인과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_PW_Re {
+            get {
+                return ResourceManager.GetString("String_Modify_PW_Re", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   계정 수정과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Modify_Title {
+            get {
+                return ResourceManager.GetString("String_Modify_Title", resourceCulture);
             }
         }
     }

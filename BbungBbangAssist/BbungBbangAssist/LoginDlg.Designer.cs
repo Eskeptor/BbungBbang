@@ -97,6 +97,7 @@
             this.Text = "관리자 로그인";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
+            this.Shown += new System.EventHandler(this.LoginDlg_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

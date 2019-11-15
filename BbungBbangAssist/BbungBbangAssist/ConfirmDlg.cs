@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BbungBbangAssist
@@ -18,7 +11,7 @@ namespace BbungBbangAssist
         public enum ConfirmDlgType
         {
             Create,     // 계정 생성
-            Modify,     // 계정 수정
+            Modify,     // 계정 수정 (사용 안함)
             Delete,     // 계정 삭제
         }
 
@@ -39,21 +32,14 @@ namespace BbungBbangAssist
         {
             switch (m_eDlgType)
             {
-                case ConfirmDlgType.Create:
+                case ConfirmDlgType.Create:     // 계정 생성
                     this.Text = Properties.Resources.String_Confirm_Create_Title;
                     confirmLblText.Text = Properties.Resources.String_Confirm_PasswdOneMore;
                     confirmEditPasswd.Visible = true;
                     confirmBtnOK.Text = Properties.Resources.String_Confirm_Btn_OK;
                     confirmBtnCancel.Text = Properties.Resources.String_Confirm_Btn_Cancel;
                     break;
-                case ConfirmDlgType.Modify:
-                    this.Text = Properties.Resources.String_Confirm_Modify_Title;
-                    confirmLblText.Text = Properties.Resources.String_Confirm_PasswdOneMore;
-                    confirmEditPasswd.Visible = true;
-                    confirmBtnOK.Text = Properties.Resources.String_Confirm_Btn_OK;
-                    confirmBtnCancel.Text = Properties.Resources.String_Confirm_Btn_Cancel;
-                    break;
-                case ConfirmDlgType.Delete:
+                case ConfirmDlgType.Delete:     // 계정 삭제
                     this.Text = Properties.Resources.String_Confirm_Delete_Title;
                     confirmLblText.Text = Properties.Resources.String_Confirm_DeleteOK;
                     confirmEditPasswd.Visible = false;
@@ -86,13 +72,12 @@ namespace BbungBbangAssist
         {
             switch (m_eDlgType)
             {
-                case ConfirmDlgType.Create:
+                case ConfirmDlgType.Create:     // 계정 생성
                     CreateActionOK();
                     break;
-                case ConfirmDlgType.Modify:
-
+                case ConfirmDlgType.Modify:     // 계정 수정 (사용 안함)
                     break;
-                case ConfirmDlgType.Delete:
+                case ConfirmDlgType.Delete:     // 계정 삭제
                     DeleteActionOK();
                     break;
             }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace BbungBbangLog
 {
@@ -18,8 +15,8 @@ namespace BbungBbangLog
             EXE,        // 행동 로그
         }
 
-        public static string LOG_GUI_FILENAME = "GUI_LOG";      // GUI 로그파일명
-        public static string LOG_EXE_FILENAME = "EXE_LOG";      // EXE 로그파일명
+        public static string LOG_GUI_FILENAME = "_GUI_LOG";      // GUI 로그파일명
+        public static string LOG_EXE_FILENAME = "_EXE_LOG";      // EXE 로그파일명
         public static string LOG_EXTENSION = ".log";            // 로그파일확장자
 
         static void Main(string[] args)
@@ -32,33 +29,27 @@ namespace BbungBbangLog
         /// <param name="logType">로그의 타입(enum LogType)</param>
         /// <param name="strLog">로그 내용</param>
         /// <param name="bIsWriteDate">로그파일의 내용에 시간을 넣을지 유무</param>
-        public static void WriteLog(LogType logType, string strLog, bool bIsWriteDate)
+        public static void WriteLog(LogType logType, string strLog, bool bIsWriteDate = true)
         {
             string strPath = string.Empty;
             DateTime dateNow = DateTime.Now;
             string strDateNow = string.Format("_{0}{1:D2}{2:D2}", dateNow.Year, dateNow.Month, dateNow.Day);
+            string strCurExeFile = Path.GetFileName(Assembly.GetEntryAssembly().Location);
+            string strFileName = strCurExeFile.Substring(0, strCurExeFile.Length - 4);
 
             switch (logType)
             {
                 case LogType.GUI:
-                    strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + LOG_GUI_FILENAME + strDateNow + LOG_EXTENSION;
+                    strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + strFileName + LOG_GUI_FILENAME + strDateNow + LOG_EXTENSION;
                     break;
                 case LogType.EXE:
-                    strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + LOG_EXE_FILENAME + strDateNow + LOG_EXTENSION;
+                    strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + strFileName + LOG_EXE_FILENAME + strDateNow + LOG_EXTENSION;
                     break;
                 default:
                     return;
             }
 
-            DirectoryInfo directoryInfo = new DirectoryInfo(strPath);
-            try
-            {
-                if (directoryInfo.Exists == false)
-                    Directory.CreateDirectory(strPath);
-
-                WriteLog(strPath, strLog, bIsWriteDate);
-            }
-            catch { }
+            WriteLog(strPath, strLog, bIsWriteDate);
         }
 
         /// <summary>
