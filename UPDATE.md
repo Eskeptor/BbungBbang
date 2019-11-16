@@ -1,3 +1,9 @@
+## Update 2019.11.16 - None Build
+```
+ 1) BbungBbangAssist -> 로그 기록 추가 완료
+ 2) BbungBbang -> 로그인 다이얼로그 완료
+```
+
 ## Update 2019.11.15 - None Build
 ```
  1) BbungBbangAssist -> 프로그램 완성

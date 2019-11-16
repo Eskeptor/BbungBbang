@@ -8,8 +8,8 @@ namespace BbungBbangAssist
     // 초기 비번 : 미래123
     public partial class LoginDlg : MetroFramework.Forms.MetroForm
     {
-        Form1 m_dlgParent = null;       // 부모 다이얼로그 (계정관리 메인 다이얼로그)
-        bool m_bIsLogin = false;        // 로그인이 되었는지 여부
+        private Form1 m_dlgParent = null;       // 부모 다이얼로그 (계정관리 메인 다이얼로그)
+        private bool m_bIsLogin = false;        // 로그인이 되었는지 여부
 
         public LoginDlg()
         {
@@ -44,7 +44,7 @@ namespace BbungBbangAssist
         {
             if (string.IsNullOrEmpty(AppConfigMgr.GetAppConfig(Global.APP_KEY_ADMIN_PASS)))
             {
-                LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 계정 초기화(계정 정보 사라짐)");
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "로그인 - 계정 초기화(계정 정보 사라짐)");
 
                 string strPass = Crypto.Encrypt(Global.DEFAULT_PASS);
                 AppConfigMgr.SetAppConfig(Global.APP_KEY_ADMIN_PASS, strPass);
@@ -65,14 +65,17 @@ namespace BbungBbangAssist
             {
                 if (m_dlgParent != null)
                 {
-                    LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인 성공");
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "로그인 - 로그인 성공");
                     m_dlgParent.Show();
                     m_bIsLogin = true;
-                    Hide();
+                    Close();
                 }
             }
             else
-                LogMgr.WriteLog(LogMgr.LogType.GUI, "로그인 - 로그인 실패");
+            {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "로그인 - 로그인 실패");
+                MessageBox.Show(Properties.Resources.String_Confirm_Msg_IncorrectPW, Properties.Resources.String_Main_Msg_Warning);
+            }
         }
 
         /// <summary>

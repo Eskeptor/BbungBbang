@@ -85,6 +85,7 @@
             this.mainBtnExit.TileTextFontSize = MetroFramework.MetroTileTextSize.Tall;
             this.mainBtnExit.UseCustomBackColor = true;
             this.mainBtnExit.UseSelectable = true;
+            this.mainBtnExit.Click += new System.EventHandler(this.mainBtnExit_Click);
             // 
             // TabMain
             // 

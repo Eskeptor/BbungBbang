@@ -1,4 +1,5 @@
 ﻿using BbungBbangCrypt;
+using BbungBbangLog;
 using System;
 using System.Windows.Forms;
 
@@ -66,10 +67,14 @@ namespace BbungBbangAssist
         /// <param name="e"></param>
         private void modifyBtnOK_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "수정 - 수정(버튼 클릭)");
+
             // 계정명이 비어있는지 확인
             // 별다른 오류가 없으면 비어있지 않음
             if (string.IsNullOrEmpty(modifyEditID.Text))
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "수정 - 수정 실패(빈 계정명)");
+
                 MessageBox.Show(Properties.Resources.String_Modify_Msg_NoneID, Properties.Resources.String_Main_Msg_Warning);
                 modifyLblID.Focus();
                 return;
@@ -78,6 +83,8 @@ namespace BbungBbangAssist
             // 이전 비밀번호가 비어있는지 확인
             if (string.IsNullOrEmpty(modifyEditPrevPW.Text))
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "수정 - 수정 실패(빈 비밀번호)");
+
                 MessageBox.Show(Properties.Resources.String_Modify_Msg_IncorrectPrevPW, Properties.Resources.String_Main_Msg_Warning);
                 modifyEditPrevPW.Focus();
                 return;
@@ -87,6 +94,8 @@ namespace BbungBbangAssist
             string strEncrypt = Crypto.Encrypt(modifyEditPrevPW.Text);
             if (m_strTargetPW.CompareTo(strEncrypt) != 0)
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "수정 - 수정 실패(올바르지 않는 원본 비밀번호)");
+
                 MessageBox.Show(Properties.Resources.String_Modify_Msg_IncorrectPrevPW, Properties.Resources.String_Main_Msg_Warning);
                 modifyEditPrevPW.Focus();
                 return;
@@ -95,6 +104,8 @@ namespace BbungBbangAssist
             // 새로운 비밀번호가 비어있는지 확인
             if (string.IsNullOrEmpty(modifyEditPW.Text))
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "수정 - 수정 실패(빈 새 비밀번호)");
+
                 MessageBox.Show(Properties.Resources.String_Modify_Msg_NonePW, Properties.Resources.String_Main_Msg_Warning);
                 modifyEditPW.Focus();
                 return;
@@ -103,6 +114,8 @@ namespace BbungBbangAssist
             // 비밀번호 확인이 비어있는지 확인
             if (string.IsNullOrEmpty(modifyEditPW2.Text))
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "수정 - 수정 실패(새 비밀번호 확인 실패)");
+
                 MessageBox.Show(Properties.Resources.String_Modify_PW_Re, Properties.Resources.String_Main_Msg_Warning);
                 modifyEditPW2.Focus();
                 return;
@@ -121,6 +134,8 @@ namespace BbungBbangAssist
 
         private void modifyBtnCancel_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "수정 - 취소(버튼 클릭)");
+
             Close();
         }
     }

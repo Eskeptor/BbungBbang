@@ -268,6 +268,15 @@ namespace BbungBbangAssist.Properties {
         }
         
         /// <summary>
+        ///   계정 목록을 불러오는데 실패하였습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Main_Msg_UserLoadFail {
+            get {
+                return ResourceManager.GetString("String_Main_Msg_UserLoadFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   경고과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_Main_Msg_Warning {

@@ -1,6 +1,6 @@
 ﻿using BbungBbangCrypt;
-using BbungBbangXml;
 using BbungBbangLog;
+using BbungBbangXml;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -19,8 +19,6 @@ namespace BbungBbangAssist
             InitializeComponent();
 
             InitControls();
-
-
         }
 
         /// <summary>
@@ -47,7 +45,13 @@ namespace BbungBbangAssist
             int nResult = XmlMgr.LoadAccount(ref m_listAccount);
             if (nResult == (int)XmlMgr.LoadResult.Success)
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 유저 정보 불러오기(성공)");
                 ResetList();
+            }
+            else
+            {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 유저 정보 불러오기(실패)");
+                MessageBox.Show(Properties.Resources.String_Main_Msg_UserLoadFail, Properties.Resources.String_Main_Msg_Warning);
             }
             // ==================================================================
 
@@ -102,6 +106,8 @@ namespace BbungBbangAssist
         /// <param name="e"></param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "메인 - 메인폼 종료");
+
             if (m_dlgLogin != null)
                 m_dlgLogin.Dispose();
         }
@@ -113,8 +119,12 @@ namespace BbungBbangAssist
         /// <param name="e"></param>
         private void mainBtnCreate_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "메인 - 생성(버튼 클릭)");
+
             if (string.IsNullOrEmpty(mainEditID.Text))
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 생성 실패(빈 계정명)");
+
                 MessageBox.Show(Properties.Resources.String_Main_Msg_NoneID, Properties.Resources.String_Main_Msg_Warning);
                 mainEditID.Focus();
                 return;
@@ -122,6 +132,8 @@ namespace BbungBbangAssist
 
             if (string.IsNullOrEmpty(mainEditPasswd.Text))
             {
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 생성 실패(빈 비밀번호)");
+
                 MessageBox.Show(Properties.Resources.String_Main_Msg_NonePW, Properties.Resources.String_Main_Msg_Warning);
                 mainEditPasswd.Focus();
                 return;
@@ -131,6 +143,8 @@ namespace BbungBbangAssist
             {
                 if (strID.CompareTo(mainEditID.Text) == 0)
                 {
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 생성 실패(이미 생성된 계정명)");
+
                     MessageBox.Show(Properties.Resources.String_Main_Msg_SameID, Properties.Resources.String_Main_Msg_Warning);
                     mainEditID.Focus();
                     return;
@@ -146,6 +160,9 @@ namespace BbungBbangAssist
 
                 if (dialogResult == DialogResult.OK)
                 {
+                    string strLog = string.Format("메인 - 생성 성공(생성된 계정:{0})", mainEditID.Text);
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, strLog);
+
                     string strCryptPW = Crypto.Encrypt(mainEditPasswd.Text);
                     m_listAccount.Add(mainEditID.Text);
                     m_listAccount.Add(strCryptPW);
@@ -155,6 +172,10 @@ namespace BbungBbangAssist
                     mainEditPasswd.Clear();
 
                     ResetList();
+                }
+                else
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 생성 취소");
                 }
             }
         }
@@ -166,6 +187,8 @@ namespace BbungBbangAssist
         /// <param name="e"></param>
         private void mainList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "메인 - 리스트 아이템 클릭");
+
             try
             {
                 int nCurSelIdx = mainList.SelectedItems[0].Index;
@@ -207,7 +230,11 @@ namespace BbungBbangAssist
                     ResetList();
 
                     string strLog = string.Format("메인 - 삭제 완료(ID: {0}", strDelID);
-                    LogMgr.WriteLog(LogMgr.LogType.GUI, strLog);
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, strLog);
+                }
+                else
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 삭제 취소");
                 }
             }
         }
@@ -244,8 +271,12 @@ namespace BbungBbangAssist
                         ResetList();
 
                         string strLog = string.Format("메인 - 수정 완료(ID: {0}", arrStrData[1]);
-                        LogMgr.WriteLog(LogMgr.LogType.GUI, strLog);
+                        LogMgr.WriteLog(LogMgr.LogType.EXE, strLog);
                     }
+                }
+                else
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "메인 - 수정 취소");
                 }
             }
         }

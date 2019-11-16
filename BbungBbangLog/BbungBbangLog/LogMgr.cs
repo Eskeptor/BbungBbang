@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace BbungBbangLog
 {
@@ -15,8 +16,9 @@ namespace BbungBbangLog
             EXE,        // 행동 로그
         }
 
-        public static string LOG_GUI_FILENAME = "_GUI_LOG";      // GUI 로그파일명
-        public static string LOG_EXE_FILENAME = "_EXE_LOG";      // EXE 로그파일명
+        public static string LOG_FOLDER = "Log";                // 로그 폴더명
+        public static string LOG_GUI_FILENAME = "_GUI_LOG";     // GUI 로그파일명
+        public static string LOG_EXE_FILENAME = "_EXE_LOG";     // EXE 로그파일명
         public static string LOG_EXTENSION = ".log";            // 로그파일확장자
 
         static void Main(string[] args)
@@ -31,25 +33,38 @@ namespace BbungBbangLog
         /// <param name="bIsWriteDate">로그파일의 내용에 시간을 넣을지 유무</param>
         public static void WriteLog(LogType logType, string strLog, bool bIsWriteDate = true)
         {
-            string strPath = string.Empty;
             DateTime dateNow = DateTime.Now;
             string strDateNow = string.Format("_{0}{1:D2}{2:D2}", dateNow.Year, dateNow.Month, dateNow.Day);
             string strCurExeFile = Path.GetFileName(Assembly.GetEntryAssembly().Location);
             string strFileName = strCurExeFile.Substring(0, strCurExeFile.Length - 4);
+            string strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + LOG_FOLDER;
 
-            switch (logType)
+
+            try
             {
-                case LogType.GUI:
-                    strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + strFileName + LOG_GUI_FILENAME + strDateNow + LOG_EXTENSION;
-                    break;
-                case LogType.EXE:
-                    strPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + strFileName + LOG_EXE_FILENAME + strDateNow + LOG_EXTENSION;
-                    break;
-                default:
-                    return;
-            }
+                DirectoryInfo directoryInfo = new DirectoryInfo(strPath);
 
-            WriteLog(strPath, strLog, bIsWriteDate);
+                if (directoryInfo.Exists == false)
+                    directoryInfo.Create();
+
+                switch (logType)
+                {
+                    case LogType.GUI:
+                        strPath += Path.DirectorySeparatorChar + strFileName + LOG_GUI_FILENAME + strDateNow + LOG_EXTENSION;
+                        break;
+                    case LogType.EXE:
+                        strPath += Path.DirectorySeparatorChar + strFileName + LOG_EXE_FILENAME + strDateNow + LOG_EXTENSION;
+                        break;
+                    default:
+                        return;
+                }
+
+                WriteLog(strPath, strLog, bIsWriteDate);
+            }
+            catch
+            {
+                MessageBox.Show("로그 폴더를 생성할 수 없습니다.");
+            }
         }
 
         /// <summary>

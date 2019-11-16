@@ -106,6 +106,8 @@
             this.Name = "ConfirmDlg";
             this.Resizable = false;
             this.Text = "ConfirmDlg";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfirmDlg_FormClosing);
+            this.Shown += new System.EventHandler(this.ConfirmDlg_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

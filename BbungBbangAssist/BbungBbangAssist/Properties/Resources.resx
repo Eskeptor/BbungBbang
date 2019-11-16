@@ -186,6 +186,9 @@
   <data name="String_Main_Msg_SameID" xml:space="preserve">
     <value>동일한 계정명이 이미 존재합니다.</value>
   </data>
+  <data name="String_Main_Msg_UserLoadFail" xml:space="preserve">
+    <value>계정 목록을 불러오는데 실패하였습니다.</value>
+  </data>
   <data name="String_Main_Msg_Warning" xml:space="preserve">
     <value>경고</value>
   </data>

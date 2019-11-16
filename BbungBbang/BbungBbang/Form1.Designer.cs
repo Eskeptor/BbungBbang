@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.mainTab = new MetroFramework.Controls.MetroTabControl();
+            this.mainTabMain = new MetroFramework.Controls.MetroTabPage();
             this.mainTabInput = new MetroFramework.Controls.MetroTabPage();
             this.mainTabReview = new MetroFramework.Controls.MetroTabPage();
             this.mainTabSettings = new MetroFramework.Controls.MetroTabPage();
-            this.mainTabMain = new MetroFramework.Controls.MetroTabPage();
             this.mainTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,14 +56,28 @@
             this.mainTab.TabIndex = 0;
             this.mainTab.UseSelectable = true;
             // 
+            // mainTabMain
+            // 
+            this.mainTabMain.HorizontalScrollbarBarColor = true;
+            this.mainTabMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.mainTabMain.HorizontalScrollbarSize = 10;
+            this.mainTabMain.Location = new System.Drawing.Point(4, 8);
+            this.mainTabMain.Name = "mainTabMain";
+            this.mainTabMain.Size = new System.Drawing.Size(1272, 923);
+            this.mainTabMain.TabIndex = 3;
+            this.mainTabMain.Text = "mainTabMain";
+            this.mainTabMain.VerticalScrollbarBarColor = true;
+            this.mainTabMain.VerticalScrollbarHighlightOnWheel = false;
+            this.mainTabMain.VerticalScrollbarSize = 10;
+            // 
             // mainTabInput
             // 
             this.mainTabInput.HorizontalScrollbarBarColor = true;
             this.mainTabInput.HorizontalScrollbarHighlightOnWheel = false;
             this.mainTabInput.HorizontalScrollbarSize = 10;
-            this.mainTabInput.Location = new System.Drawing.Point(4, 6);
+            this.mainTabInput.Location = new System.Drawing.Point(4, 8);
             this.mainTabInput.Name = "mainTabInput";
-            this.mainTabInput.Size = new System.Drawing.Size(1272, 925);
+            this.mainTabInput.Size = new System.Drawing.Size(1272, 923);
             this.mainTabInput.TabIndex = 0;
             this.mainTabInput.Text = "mainTabInput";
             this.mainTabInput.VerticalScrollbarBarColor = true;
@@ -75,9 +89,9 @@
             this.mainTabReview.HorizontalScrollbarBarColor = true;
             this.mainTabReview.HorizontalScrollbarHighlightOnWheel = false;
             this.mainTabReview.HorizontalScrollbarSize = 10;
-            this.mainTabReview.Location = new System.Drawing.Point(4, 7);
+            this.mainTabReview.Location = new System.Drawing.Point(4, 8);
             this.mainTabReview.Name = "mainTabReview";
-            this.mainTabReview.Size = new System.Drawing.Size(1272, 924);
+            this.mainTabReview.Size = new System.Drawing.Size(1272, 923);
             this.mainTabReview.TabIndex = 1;
             this.mainTabReview.Text = "mainTabReview";
             this.mainTabReview.VerticalScrollbarBarColor = true;
@@ -98,20 +112,6 @@
             this.mainTabSettings.VerticalScrollbarHighlightOnWheel = false;
             this.mainTabSettings.VerticalScrollbarSize = 10;
             // 
-            // mainTabMain
-            // 
-            this.mainTabMain.HorizontalScrollbarBarColor = true;
-            this.mainTabMain.HorizontalScrollbarHighlightOnWheel = false;
-            this.mainTabMain.HorizontalScrollbarSize = 10;
-            this.mainTabMain.Location = new System.Drawing.Point(4, 8);
-            this.mainTabMain.Name = "mainTabMain";
-            this.mainTabMain.Size = new System.Drawing.Size(1272, 923);
-            this.mainTabMain.TabIndex = 3;
-            this.mainTabMain.Text = "mainTabMain";
-            this.mainTabMain.VerticalScrollbarBarColor = true;
-            this.mainTabMain.VerticalScrollbarHighlightOnWheel = false;
-            this.mainTabMain.VerticalScrollbarSize = 10;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -122,6 +122,7 @@
             this.Name = "Form1";
             this.Resizable = false;
             this.Text = "Form1";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.mainTab.ResumeLayout(false);
             this.ResumeLayout(false);
