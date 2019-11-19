@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.mainTab = new MetroFramework.Controls.MetroTabControl();
             this.mainTabMain = new MetroFramework.Controls.MetroTabPage();
             this.mainTabInput = new MetroFramework.Controls.MetroTabPage();
             this.mainTabReview = new MetroFramework.Controls.MetroTabPage();
             this.mainTabSettings = new MetroFramework.Controls.MetroTabPage();
+            this.mainBtnBack = new MetroFramework.Controls.MetroTile();
             this.mainTab.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,11 +114,25 @@
             this.mainTabSettings.VerticalScrollbarHighlightOnWheel = false;
             this.mainTabSettings.VerticalScrollbarSize = 10;
             // 
+            // mainBtnBack
+            // 
+            this.mainBtnBack.ActiveControl = null;
+            this.mainBtnBack.Location = new System.Drawing.Point(222, 22);
+            this.mainBtnBack.Name = "mainBtnBack";
+            this.mainBtnBack.Size = new System.Drawing.Size(34, 35);
+            this.mainBtnBack.TabIndex = 1;
+            this.mainBtnBack.TileImage = ((System.Drawing.Image)(resources.GetObject("mainBtnBack.TileImage")));
+            this.mainBtnBack.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mainBtnBack.UseSelectable = true;
+            this.mainBtnBack.UseTileImage = true;
+            this.mainBtnBack.Click += new System.EventHandler(this.mainBtnBack_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 1024);
+            this.Controls.Add(this.mainBtnBack);
             this.Controls.Add(this.mainTab);
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -136,6 +152,7 @@
         private MetroFramework.Controls.MetroTabPage mainTabReview;
         private MetroFramework.Controls.MetroTabPage mainTabSettings;
         private MetroFramework.Controls.MetroTabPage mainTabMain;
+        private MetroFramework.Controls.MetroTile mainBtnBack;
     }
 }
 

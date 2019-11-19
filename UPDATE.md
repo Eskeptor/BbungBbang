@@ -1,3 +1,8 @@
+## Update 2019.11.19 - None Build
+```
+ 1) BbungBbang -> 탭 추가(DonationInput, DonationView, Settings)
+```
+
 ## Update 2019.11.16 - None Build
 ```
  1) BbungBbangAssist -> 로그 기록 추가 완료

@@ -5,8 +5,11 @@ namespace BbungBbang
 {
     public partial class Form1 : MetroFramework.Forms.MetroForm
     {
-        private LoginDlg m_dlgLogin = null;
-        private TabMain m_tabMain = null;
+        private LoginDlg m_dlgLogin = null;                     // 로그인 다이얼로그
+        private TabMain m_tabMain = null;                       // 메인 화면 탭
+        private TabDonationInput m_tabDonationInput = null;     // 헌금 입력 탭
+        private TabDonationView m_tabDonationView = null;       // 헌금 현황 탭
+        private TabSettings m_tabSettings = null;               // 설정 탭
 
         public Form1()
         {
@@ -24,11 +27,13 @@ namespace BbungBbang
             InitTab();
 
             // ==================================================================
+            // 로그인 다이얼로그
             m_dlgLogin = new LoginDlg();
             m_dlgLogin.SetParent(this);
             m_dlgLogin.ShowDialog();
             Hide();
             // ==================================================================
+
         }
 
         /// <summary>
@@ -48,6 +53,9 @@ namespace BbungBbang
             return strFormName;
         }
 
+        /// <summary>
+        /// 메인 탭 초기화
+        /// </summary>
         private void InitTab()
         {
             m_tabMain = new TabMain();
@@ -60,6 +68,30 @@ namespace BbungBbang
             mainTabMain.Controls.Add(m_tabMain);
             m_tabMain.Show();
 
+            m_tabDonationInput = new TabDonationInput();
+            m_tabDonationInput.TopLevel = false;
+            m_tabDonationInput.TopMost = true;
+            m_tabDonationInput.Location = new Point(0, 0);
+            mainTabInput.Controls.Clear();
+            mainTabInput.Controls.Add(m_tabDonationInput);
+            m_tabDonationInput.Show();
+
+            m_tabDonationView = new TabDonationView();
+            m_tabDonationView.TopLevel = false;
+            m_tabDonationView.TopMost = true;
+            m_tabDonationView.Location = new Point(0, 0);
+            mainTabReview.Controls.Clear();
+            mainTabReview.Controls.Add(m_tabDonationView);
+            m_tabDonationView.Show();
+
+            m_tabSettings = new TabSettings();
+            m_tabSettings.TopLevel = false;
+            m_tabSettings.TopMost = true;
+            m_tabSettings.Location = new Point(0, 0);
+            mainTabSettings.Controls.Clear();
+            mainTabSettings.Controls.Add(m_tabSettings);
+            m_tabSettings.Show();
+
             mainTab.SelectedTab = mainTabMain;
         }
 
@@ -67,15 +99,25 @@ namespace BbungBbang
         /// 탭 페이지를 변경하는 메소드(딜리게이트에 연결해서 사용)
         /// </summary>
         /// <param name="nPage">변경할 페이지</param>
-        public void ChangeTabPage(int nPage)
+        public void ChangeTabPage(Global.Page nPage)
         {
             switch (nPage)
             {
-                case (int)Global.Page.Main:
+                case Global.Page.Main:
+                    mainTab.SelectedTab = mainTabMain;
+                    mainBtnBack.Hide();
                     break;
-                case (int)Global.Page.Input:
+                case Global.Page.Input:
+                    mainTab.SelectedTab = mainTabInput;
+                    mainBtnBack.Show();
                     break;
-                case (int)Global.Page.Review:
+                case Global.Page.Review:
+                    mainTab.SelectedTab = mainTabReview;
+                    mainBtnBack.Show();
+                    break;
+                case Global.Page.Settings:
+                    mainTab.SelectedTab = mainTabSettings;
+                    mainBtnBack.Show();
                     break;
             }
         }
@@ -98,6 +140,16 @@ namespace BbungBbang
 
             if (m_dlgLogin != null)
                 m_dlgLogin.Dispose();
+        }
+
+        /// <summary>
+        /// 뒤로가기 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainBtnBack_Click(object sender, System.EventArgs e)
+        {
+            ChangeTabPage(Global.Page.Main);
         }
     }
 }
