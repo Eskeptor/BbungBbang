@@ -1,4 +1,6 @@
-﻿namespace BbungBbang
+﻿using System.Drawing;
+
+namespace BbungBbang
 {
     public class Global
     {
@@ -12,5 +14,7 @@
             Review,     // 현황 화면
             Settings    // 설정 화면
         }
+
+        public static Color COLOR_BASIC_BLUE = Color.FromArgb(0, 174, 219);
     }
 }

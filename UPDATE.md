@@ -1,3 +1,8 @@
+## Update 2019.11.28 - None Build
+```
+ 1) BbungBbang -> DonationInput 디자인중
+```
+
 ## Update 2019.11.19 - None Build
 ```
  1) BbungBbang -> 탭 추가(DonationInput, DonationView, Settings)
