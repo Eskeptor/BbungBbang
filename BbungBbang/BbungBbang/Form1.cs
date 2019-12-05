@@ -109,6 +109,7 @@ namespace BbungBbang
                     break;
                 case Global.Page.Input:
                     mainTab.SelectedTab = mainTabInput;
+                    m_tabDonationInput.LoadDonationFile();
                     mainBtnBack.Show();
                     break;
                 case Global.Page.Review:

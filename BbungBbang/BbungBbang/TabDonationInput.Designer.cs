@@ -44,6 +44,7 @@
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.metroButton4 = new MetroFramework.Controls.MetroButton();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
             this.metroTextBox5 = new MetroFramework.Controls.MetroTextBox();
@@ -55,16 +56,16 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.metroListView2 = new MetroFramework.Controls.MetroListView();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
             this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel5 = new MetroFramework.Controls.MetroPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -294,6 +295,14 @@
             this.metroButton4.Text = "추가";
             this.metroButton4.UseSelectable = true;
             // 
+            // metroLabel13
+            // 
+            this.metroLabel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroLabel13.Location = new System.Drawing.Point(3, 26);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(365, 218);
+            this.metroLabel13.TabIndex = 20;
+            // 
             // metroPanel2
             // 
             this.metroPanel2.Controls.Add(this.metroLabel1);
@@ -469,6 +478,14 @@
             this.metroLabel7.UseCustomBackColor = true;
             this.metroLabel7.UseCustomForeColor = true;
             // 
+            // metroLabel12
+            // 
+            this.metroLabel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroLabel12.Location = new System.Drawing.Point(3, 26);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(605, 461);
+            this.metroLabel12.TabIndex = 20;
+            // 
             // metroPanel4
             // 
             this.metroPanel4.Controls.Add(this.metroLabel8);
@@ -530,22 +547,6 @@
             this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel12
-            // 
-            this.metroLabel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroLabel12.Location = new System.Drawing.Point(3, 26);
-            this.metroLabel12.Name = "metroLabel12";
-            this.metroLabel12.Size = new System.Drawing.Size(605, 461);
-            this.metroLabel12.TabIndex = 20;
-            // 
-            // metroLabel13
-            // 
-            this.metroLabel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroLabel13.Location = new System.Drawing.Point(3, 26);
-            this.metroLabel13.Name = "metroLabel13";
-            this.metroLabel13.Size = new System.Drawing.Size(365, 218);
-            this.metroLabel13.TabIndex = 20;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -582,6 +583,17 @@
             this.metroPanel5.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel5.VerticalScrollbarSize = 10;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            this.label2.Location = new System.Drawing.Point(14, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(231, 34);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "2020년 12월 22일";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -594,16 +606,15 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "오후";
             // 
-            // label2
+            // button1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            this.label2.Location = new System.Drawing.Point(14, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(231, 34);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "2020년 12월 22일";
+            this.button1.Location = new System.Drawing.Point(1048, 332);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(73, 43);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "테스트";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TabDonationInput
             // 
@@ -612,6 +623,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1280, 935);
             this.ControlBox = false;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.metroPanel5);
             this.Controls.Add(this.metroPanel4);
             this.Controls.Add(this.metroPanel3);
@@ -620,6 +632,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TabDonationInput";
             this.Text = "TabDonationInput";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TabDonationInput_FormClosing);
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             this.metroPanel2.ResumeLayout(false);
@@ -671,5 +684,6 @@
         private MetroFramework.Controls.MetroPanel metroPanel5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }

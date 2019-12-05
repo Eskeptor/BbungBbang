@@ -79,6 +79,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
+    <Compile Include="LoadingDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadingDlg.Designer.cs">
+      <DependentUpon>LoadingDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadingDlg.resx">
+      <DependentUpon>LoadingDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginDlg.resx">
       <DependentUpon>LoginDlg.cs</DependentUpon>

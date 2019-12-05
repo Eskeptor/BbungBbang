@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 
 namespace BbungBbang
 {
@@ -6,6 +9,8 @@ namespace BbungBbang
     {
         public static string APP_KEY_FORM_NAME = "FormName";
         public static string PATH_USER_FOLDER = "User";
+        public static string PATH_DONATION_FILE = "Donation.dat";
+        public static string PATH_DONATION_DATA = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + PATH_DONATION_FILE;
 
         public enum Page
         {
@@ -15,6 +20,31 @@ namespace BbungBbang
             Settings    // 설정 화면
         }
 
+        public enum DonationType
+        {
+            Normal,         // 주정 헌금
+            Thanks,         // 감사 헌금
+            MissonWork,     // 선교 헌금
+            Build,          // 건축 헌금
+            Etc,            // 기타 헌금
+            Season,         // 절기 헌금
+        }
+
         public static Color COLOR_BASIC_BLUE = Color.FromArgb(0, 174, 219);
+    }
+
+    [Serializable]
+    public class Donation
+    {
+        public int Money { get; set; }
+        public System.DateTime DonationTime { get; set; }
+        public Global.DonationType DonationType { get; set; }
+    }
+
+    [Serializable]
+    public class User
+    {
+        public string Name { get; set; }
+        public List<Donation> Donations = new List<Donation>();
     }
 }
