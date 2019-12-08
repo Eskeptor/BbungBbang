@@ -145,4 +145,10 @@
   <data name="baseline_arrow_back_white_24dp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\baseline_arrow_back_white_24dp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="String_Time_AM" xml:space="preserve">
+    <value>오전</value>
+  </data>
+  <data name="String_Time_PM" xml:space="preserve">
+    <value>오후</value>
+  </data>
 </root>

@@ -9,8 +9,10 @@ namespace BbungBbang
     {
         public static string APP_KEY_FORM_NAME = "FormName";
         public static string PATH_USER_FOLDER = "User";
+        public static string PATH_DATA_FOLDER = "Data";
         public static string PATH_DONATION_FILE = "Donation.dat";
-        public static string PATH_DONATION_DATA = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + PATH_DONATION_FILE;
+        public static string PATH_DONATION_DATA = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar +
+                                                  PATH_DATA_FOLDER + Path.DirectorySeparatorChar + PATH_DONATION_FILE;
 
         public enum Page
         {

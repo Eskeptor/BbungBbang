@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using BbungBbangLog;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace BbungBbang
@@ -15,9 +17,13 @@ namespace BbungBbang
         {
             InitializeComponent();
 
+            InitFolders();
             InitControls();
         }
 
+        /// <summary>
+        /// 컨트롤 초기화
+        /// </summary>
         private void InitControls()
         {
             // 다이얼로그 명 설정
@@ -34,6 +40,36 @@ namespace BbungBbang
             Hide();
             // ==================================================================
 
+        }
+
+        /// <summary>
+        /// 초기 폴더 확인 및 생성
+        /// </summary>
+        private void InitFolders()
+        {
+            // ==================================================================
+            // Data 폴더 확인
+            try
+            {
+                string strFolderPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + Global.PATH_DATA_FOLDER;
+                DirectoryInfo directoryInfo = new DirectoryInfo(strFolderPath);
+
+                if (directoryInfo.Exists == false)
+                {
+                    directoryInfo.Create();
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "Data 폴더 생성");
+                }
+                else
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, "Data 폴더 체크 완료");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("로그 폴더를 생성할 수 없습니다.");
+                LogMgr.WriteLog(LogMgr.LogType.EXE, "Data 폴더 생성 실패");
+            }
+            // ==================================================================
         }
 
         /// <summary>
@@ -130,6 +166,9 @@ namespace BbungBbang
 
             if (m_dlgLogin != null)
                 m_dlgLogin.Dispose();
+
+            if (m_tabDonationInput != null)
+                m_tabDonationInput.Dispose();
 
             Application.Exit();
         }

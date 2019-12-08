@@ -141,5 +141,23 @@ namespace BbungBbang.Properties {
                 return ResourceManager.GetString("String_Login_Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   오전과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Time_AM {
+            get {
+                return ResourceManager.GetString("String_Time_AM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   오후과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Time_PM {
+            get {
+                return ResourceManager.GetString("String_Time_PM", resourceCulture);
+            }
+        }
     }
 }
