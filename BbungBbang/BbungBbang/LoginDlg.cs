@@ -106,7 +106,7 @@ namespace BbungBbang
                 {
                     if (m_dlgParent != null)
                     {
-                        LogMgr.WriteLog(LogMgr.LogType.EXE, "로그인 - 로그인 성공");
+                        LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("로그인 - 로그인 성공({0})", loginCBoxID.Text));
                         m_dlgParent.Show();
                         m_bIsLogin = true;
                         Close();

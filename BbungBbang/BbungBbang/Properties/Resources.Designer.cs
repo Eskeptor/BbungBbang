@@ -71,6 +71,24 @@ namespace BbungBbang.Properties {
         }
         
         /// <summary>
+        ///   변경사항을 전부 저장하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_AllSave {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_AllSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   저장과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_AllSave_Title {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_AllSave_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   로그인과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_Login_Btn_Login {
@@ -139,6 +157,69 @@ namespace BbungBbang.Properties {
         internal static string String_Login_Title {
             get {
                 return ResourceManager.GetString("String_Login_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름이 비어있습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_NewUser_Msg_Err_NoName {
+            get {
+                return ResourceManager.GetString("String_NewUser_Msg_Err_NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_NewUser_Name_Title {
+            get {
+                return ResourceManager.GetString("String_NewUser_Name_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   유저 추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_NewUser_Title {
+            get {
+                return ResourceManager.GetString("String_NewUser_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   취소과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Popup_Cancel {
+            get {
+                return ResourceManager.GetString("String_Popup_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   아니오과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Popup_No {
+            get {
+                return ResourceManager.GetString("String_Popup_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   확인과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Popup_Ok {
+            get {
+                return ResourceManager.GetString("String_Popup_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   예과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_Popup_Yes {
+            get {
+                return ResourceManager.GetString("String_Popup_Yes", resourceCulture);
             }
         }
         

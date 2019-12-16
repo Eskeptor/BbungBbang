@@ -43,10 +43,11 @@
             this.donEditNewDon = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.donCBoxNewName = new MetroFramework.Controls.MetroComboBox();
+            this.donEditName = new MetroFramework.Controls.MetroTextBox();
             this.donBtnNewAdd = new MetroFramework.Controls.MetroButton();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
+            this.donBtnUserMod = new MetroFramework.Controls.MetroButton();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
             this.donEditUserHistoryDon = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel10 = new MetroFramework.Controls.MetroLabel();
@@ -81,12 +82,14 @@
             this.donListUsers.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.donListUsers.FullRowSelect = true;
             this.donListUsers.Location = new System.Drawing.Point(3, 26);
+            this.donListUsers.MultiSelect = false;
             this.donListUsers.Name = "donListUsers";
             this.donListUsers.OwnerDraw = true;
             this.donListUsers.Size = new System.Drawing.Size(365, 411);
             this.donListUsers.TabIndex = 0;
             this.donListUsers.UseCompatibleStateImageBehavior = false;
             this.donListUsers.UseSelectable = true;
+            this.donListUsers.View = System.Windows.Forms.View.List;
             // 
             // metroLabel1
             // 
@@ -106,7 +109,7 @@
             this.donBtnUserSel.FontSize = MetroFramework.MetroButtonSize.Medium;
             this.donBtnUserSel.Location = new System.Drawing.Point(3, 443);
             this.donBtnUserSel.Name = "donBtnUserSel";
-            this.donBtnUserSel.Size = new System.Drawing.Size(118, 44);
+            this.donBtnUserSel.Size = new System.Drawing.Size(86, 44);
             this.donBtnUserSel.TabIndex = 2;
             this.donBtnUserSel.Text = "선택";
             this.donBtnUserSel.UseSelectable = true;
@@ -114,9 +117,9 @@
             // donBtnUserAdd
             // 
             this.donBtnUserAdd.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.donBtnUserAdd.Location = new System.Drawing.Point(127, 443);
+            this.donBtnUserAdd.Location = new System.Drawing.Point(96, 443);
             this.donBtnUserAdd.Name = "donBtnUserAdd";
-            this.donBtnUserAdd.Size = new System.Drawing.Size(118, 44);
+            this.donBtnUserAdd.Size = new System.Drawing.Size(86, 44);
             this.donBtnUserAdd.TabIndex = 3;
             this.donBtnUserAdd.Text = "추가";
             this.donBtnUserAdd.UseSelectable = true;
@@ -165,9 +168,9 @@
             // donBtnUserDel
             // 
             this.donBtnUserDel.FontSize = MetroFramework.MetroButtonSize.Medium;
-            this.donBtnUserDel.Location = new System.Drawing.Point(250, 443);
+            this.donBtnUserDel.Location = new System.Drawing.Point(282, 443);
             this.donBtnUserDel.Name = "donBtnUserDel";
-            this.donBtnUserDel.Size = new System.Drawing.Size(118, 44);
+            this.donBtnUserDel.Size = new System.Drawing.Size(86, 44);
             this.donBtnUserDel.TabIndex = 9;
             this.donBtnUserDel.Text = "삭제";
             this.donBtnUserDel.UseSelectable = true;
@@ -234,7 +237,7 @@
             // 
             // metroPanel1
             // 
-            this.metroPanel1.Controls.Add(this.donCBoxNewName);
+            this.metroPanel1.Controls.Add(this.donEditName);
             this.metroPanel1.Controls.Add(this.metroLabel2);
             this.metroPanel1.Controls.Add(this.donBtnNewAdd);
             this.metroPanel1.Controls.Add(this.donEditNewDon);
@@ -256,15 +259,38 @@
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
             // 
-            // donCBoxNewName
+            // donEditName
             // 
-            this.donCBoxNewName.FormattingEnabled = true;
-            this.donCBoxNewName.ItemHeight = 23;
-            this.donCBoxNewName.Location = new System.Drawing.Point(103, 36);
-            this.donCBoxNewName.Name = "donCBoxNewName";
-            this.donCBoxNewName.Size = new System.Drawing.Size(257, 29);
-            this.donCBoxNewName.TabIndex = 21;
-            this.donCBoxNewName.UseSelectable = true;
+            // 
+            // 
+            // 
+            this.donEditName.CustomButton.Image = null;
+            this.donEditName.CustomButton.Location = new System.Drawing.Point(230, 1);
+            this.donEditName.CustomButton.Name = "";
+            this.donEditName.CustomButton.Size = new System.Drawing.Size(27, 27);
+            this.donEditName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.donEditName.CustomButton.TabIndex = 1;
+            this.donEditName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.donEditName.CustomButton.UseSelectable = true;
+            this.donEditName.CustomButton.Visible = false;
+            this.donEditName.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.donEditName.Lines = new string[] {
+        "metroTextBox2"};
+            this.donEditName.Location = new System.Drawing.Point(103, 36);
+            this.donEditName.MaxLength = 32767;
+            this.donEditName.Name = "donEditName";
+            this.donEditName.PasswordChar = '\0';
+            this.donEditName.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.donEditName.SelectedText = "";
+            this.donEditName.SelectionLength = 0;
+            this.donEditName.SelectionStart = 0;
+            this.donEditName.ShortcutsEnabled = true;
+            this.donEditName.Size = new System.Drawing.Size(258, 29);
+            this.donEditName.TabIndex = 21;
+            this.donEditName.Text = "metroTextBox2";
+            this.donEditName.UseSelectable = true;
+            this.donEditName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.donEditName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // donBtnNewAdd
             // 
@@ -286,6 +312,7 @@
             // 
             // metroPanel2
             // 
+            this.metroPanel2.Controls.Add(this.donBtnUserMod);
             this.metroPanel2.Controls.Add(this.metroLabel1);
             this.metroPanel2.Controls.Add(this.donBtnUserDel);
             this.metroPanel2.Controls.Add(this.donBtnUserAdd);
@@ -302,8 +329,19 @@
             this.metroPanel2.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel2.VerticalScrollbarSize = 10;
             // 
+            // donBtnUserMod
+            // 
+            this.donBtnUserMod.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.donBtnUserMod.Location = new System.Drawing.Point(189, 443);
+            this.donBtnUserMod.Name = "donBtnUserMod";
+            this.donBtnUserMod.Size = new System.Drawing.Size(86, 44);
+            this.donBtnUserMod.TabIndex = 10;
+            this.donBtnUserMod.Text = "수정";
+            this.donBtnUserMod.UseSelectable = true;
+            // 
             // metroPanel3
             // 
+            this.metroPanel3.Controls.Add(this.metroLabel7);
             this.metroPanel3.Controls.Add(this.donEditUserHistoryDon);
             this.metroPanel3.Controls.Add(this.metroLabel10);
             this.metroPanel3.Controls.Add(this.metroLabel11);
@@ -312,7 +350,6 @@
             this.metroPanel3.Controls.Add(this.donEditUserHistoryName);
             this.metroPanel3.Controls.Add(this.donCalendar);
             this.metroPanel3.Controls.Add(this.donListUserHistory);
-            this.metroPanel3.Controls.Add(this.metroLabel7);
             this.metroPanel3.Controls.Add(this.metroLabel12);
             this.metroPanel3.HorizontalScrollbarBarColor = true;
             this.metroPanel3.HorizontalScrollbarHighlightOnWheel = false;
@@ -430,7 +467,7 @@
             // 
             // donCalendar
             // 
-            this.donCalendar.Location = new System.Drawing.Point(384, 28);
+            this.donCalendar.Location = new System.Drawing.Point(389, 27);
             this.donCalendar.Name = "donCalendar";
             this.donCalendar.TabIndex = 4;
             // 
@@ -588,7 +625,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1119, 463);
+            this.button1.Location = new System.Drawing.Point(1201, 734);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(73, 43);
             this.button1.TabIndex = 21;
@@ -609,6 +646,7 @@
             this.donBtnAllSave.UseCustomBackColor = true;
             this.donBtnAllSave.UseCustomForeColor = true;
             this.donBtnAllSave.UseSelectable = true;
+            this.donBtnAllSave.Click += new System.EventHandler(this.donBtnAllSave_Click);
             // 
             // donTimerCurTime
             // 
@@ -684,7 +722,8 @@
         private System.Windows.Forms.Label donLblPMAM;
         private System.Windows.Forms.Button button1;
         private MetroFramework.Controls.MetroButton donBtnAllSave;
-        private MetroFramework.Controls.MetroComboBox donCBoxNewName;
         private System.Windows.Forms.Timer donTimerCurTime;
+        private MetroFramework.Controls.MetroButton donBtnUserMod;
+        private MetroFramework.Controls.MetroTextBox donEditName;
     }
 }

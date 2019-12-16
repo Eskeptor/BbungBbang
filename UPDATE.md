@@ -1,3 +1,9 @@
+## Update 2019.12.16 - None Build
+```
+ 1) BbungBbang -> DonationInput 기능 구현중
+                  (유저 생성, 변경사항 저장)
+```
+
 ## Update 2019.11.28 - None Build
 ```
  1) BbungBbang -> DonationInput 디자인중

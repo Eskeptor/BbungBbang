@@ -32,6 +32,13 @@ namespace BbungBbang
             Season,         // 절기 헌금
         }
 
+        public enum ListType
+        {
+            None,
+            UserList,       // 유저 목록 리스트
+            UserHistory,    // 유저 히스토리 리스트
+        }
+
         public static Color COLOR_BASIC_BLUE = Color.FromArgb(0, 174, 219);
     }
 
@@ -48,5 +55,10 @@ namespace BbungBbang
     {
         public string Name { get; set; }
         public List<Donation> Donations = new List<Donation>();
+
+        public User(string strName)
+        {
+            Name = strName;
+        }
     }
 }
