@@ -1,3 +1,9 @@
+## Update (2020.1.8) - None Build
+```
+ 1) BbungBbang -> DonationInput 기능 구현중
+                  (Donation 추가 및 확인 작성중)
+```
+
 ## Update 2019.12.16 - None Build
 ```
  1) BbungBbang -> DonationInput 기능 구현중

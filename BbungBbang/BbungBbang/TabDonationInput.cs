@@ -17,13 +17,14 @@ namespace BbungBbang
 {
     public partial class TabDonationInput : Form
     {
-        delegate void DelegateThreadSafeUpdateControl();
+        delegate void DelegateThreadSafeUpdateControl(Global.UserDataThreadType eType, bool bIsSuccessed);
 
-        private Thread m_thrFileLoad = null;                // 파일 로드용 스레드
-        private Thread m_thrFileSave = null;                // 파일 세이브용 스레드
-        private LoadingDlg m_dlgLoading = null;             // 로딩 창 다이얼로그
-        private List<User> m_listUsers = null;              // 유저 리스트
-        private string m_strDlgReturns = string.Empty;      // 다른 다이얼로그로부터 받은 데이터
+        private Thread m_thrFileLoad = null;                        // 파일 로드용 스레드
+        private Thread m_thrFileSave = null;                        // 파일 세이브용 스레드
+        private LoadingDlg m_dlgLoading = null;                     // 로딩 창 다이얼로그
+        private List<User> m_listUsers = null;                      // 유저 리스트
+        private string m_strDlgReturns = string.Empty;              // 다른 다이얼로그로부터 받은 데이터
+        private int m_nCurSelectedUserIdx = Global.USER_IDX_NONE;   // 유저 리스트에서 현재 선택된 유저 인덱스
 
         private event DelegateThreadSafeUpdateControl DelegateUpdateControl;
 
@@ -44,14 +45,53 @@ namespace BbungBbang
             donTimerCurTime.Start();
         }
 
+        /// <summary>
+        /// 컨트롤 초기화
+        /// </summary>
         private void InitControls()
         {
+            // 유저 리스트
             donListUsers.Columns.Add("이름", donListUsers.Size.Width);
+            donLblUserTitle.Text = StringResource.String_DonInput_Userlist_Title;
+            donBtnUserSel.Text = StringResource.String_DonInput_Userlist_Btn_Select;
+            donBtnUserAdd.Text = StringResource.String_DonInput_Userlist_Btn_Add;
+            donBtnUserMod.Text = StringResource.String_DonInput_Userlist_Btn_Modify;
+            donBtnUserDel.Text = StringResource.String_DonInput_Userlist_Btn_Del;
+
+            // 유저 히스토리
+            donLblUserHistoryTitle.Text = StringResource.String_DonInput_History_Title;
+            donLblUserHistoryName.Text = StringResource.String_DonInput_History_Name;
+            donLblUserHistoryDonType.Text = StringResource.String_DonInput_History_DonType;
+            donLblUserHistoryDon.Text = StringResource.String_DonInput_History_Don;
+
+            donCBoxNewType.Items.AddRange(Global.STR_DONATION_TYPE);
+            donCBoxUserHistoryType.Items.AddRange(Global.STR_DONATION_TYPE);
         }
 
-        private void ThreadSafeUpdateControl()
+        /// <summary>
+        /// Thread Safe한 컨트롤 업데이트 메소드
+        ///  - 로딩 다이얼로그 Hide
+        ///  - 성공유무에따른 메시지박스 Show
+        /// </summary>
+        /// <param name="bIsSuccessed"></param>
+        private void ThreadSafeUpdateControl(Global.UserDataThreadType eType, bool bIsSuccessed)
         {
             m_dlgLoading.Hide();
+
+            switch (eType)
+            {
+                case Global.UserDataThreadType.Load:
+                    
+                    break;
+                case Global.UserDataThreadType.Save:
+                    {
+                        if (bIsSuccessed)
+                            MessageBox.Show(StringResource.String_DonInput_Msg_AllSaveComplete, StringResource.String_DonInput_Msg_AllSave_Title);
+                        else
+                            MessageBox.Show(StringResource.String_DonInput_Msg_AllSaveFailed, StringResource.String_Login_Msg_Warning);
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -76,22 +116,25 @@ namespace BbungBbang
         /// </summary>
         private void LoadFileThread()
         {
+            bool bIsSuccessed = false;      // 스레드 동작 성공 유무
             try
             {
                 string strFolderPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + Global.PATH_DATA_FOLDER;
                 DirectoryInfo directoryInfo = new DirectoryInfo(strFolderPath);
 
+                // Data 폴더가 없을 때 폴더를 생성
                 if (directoryInfo.Exists == false)
                 {
                     directoryInfo.Create();
                     LogMgr.WriteLog(LogMgr.LogType.EXE, "LoadFileThread : Data 폴더 생성");
                 }
+                // Data 폴더가 있을 때는 유저 데이터 파일 확인
                 else
                 {
                     FileInfo fileInfo = new FileInfo(Global.PATH_DONATION_DATA);
-
                     try
                     {
+                        // 유저 데이터 파일이 존재할 경우
                         if (fileInfo.Exists)
                         {
                             using (Stream stream = new FileStream(Global.PATH_DONATION_DATA, FileMode.Open))
@@ -103,6 +146,7 @@ namespace BbungBbang
                                     LogMgr.WriteLog(LogMgr.LogType.EXE, "LoadFileThread : 유저 데이터 로드 완료");
 
                                     BeginInvoke((MethodInvoker)(() => RefreshList(Global.ListType.UserList)));
+                                    bIsSuccessed = true;
                                 }
                                 catch (Exception e)
                                 {
@@ -111,6 +155,7 @@ namespace BbungBbang
                                 }
                             }
                         }
+                        // 유저 데이터 파일이 존재하지 않을 경우
                         else
                         {
                             m_listUsers = new List<User>();
@@ -132,9 +177,9 @@ namespace BbungBbang
             }
 
             if (m_dlgLoading.InvokeRequired)
-                m_dlgLoading.Invoke(DelegateUpdateControl);
+                m_dlgLoading.Invoke(DelegateUpdateControl, Global.UserDataThreadType.Load, bIsSuccessed);
             else
-                m_dlgLoading.Hide();
+                ThreadSafeUpdateControl(Global.UserDataThreadType.Load, bIsSuccessed);
 
             m_thrFileLoad = null;
         }
@@ -150,6 +195,7 @@ namespace BbungBbang
                 case Global.ListType.UserList:
                     {
                         donListUsers.Items.Clear();
+
                         donListUsers.BeginUpdate();
                         foreach (User user in m_listUsers)
                         {
@@ -159,6 +205,19 @@ namespace BbungBbang
                     }
                     break;
                 case Global.ListType.UserHistory:
+                    {
+                        donListUserHistory.Items.Clear();
+
+                        donListUserHistory.BeginUpdate();
+                        foreach (Donation donation in m_listUsers[m_nCurSelectedUserIdx].Donations)
+                        {
+                            string[] arrHistory = new string[2] { donation.DonationTime.ToString(), donation.DonationType.ToString() };
+                            ListViewItem item = new ListViewItem(arrHistory);
+
+                            donListUserHistory.Items.Add(item);
+                        }
+                        donListUserHistory.EndUpdate();
+                    }
                     break;
             }
         }
@@ -187,36 +246,39 @@ namespace BbungBbang
         private void SaveFileThread(object eType)
         {
             Global.ListType eCurType = (Global.ListType)eType;
+            bool bIsSuccessed = false;
             try
             {
                 string strFolderPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + Global.PATH_DATA_FOLDER;
                 DirectoryInfo directoryInfo = new DirectoryInfo(strFolderPath);
 
+                // Data 폴더가 없을 때 폴더를 생성
                 if (directoryInfo.Exists == false)
                 {
                     directoryInfo.Create();
                     LogMgr.WriteLog(LogMgr.LogType.EXE, "SaveFileThread : Data 폴더 생성");
                 }
-                else
-                {
-                    using (Stream stream = new FileStream(Global.PATH_DONATION_DATA, FileMode.Create))
-                    {
-                        try
-                        {
-                            BinaryFormatter serializer = new BinaryFormatter();
-                            serializer.Serialize(stream, m_listUsers);
-                            LogMgr.WriteLog(LogMgr.LogType.EXE, "SaveFileThread : 유저 데이터 저장 완료");
 
-                            if (eCurType != Global.ListType.None)
-                                BeginInvoke((MethodInvoker)(() => RefreshList(eCurType)));
-                        }
-                        catch (Exception e)
-                        {
-                            string strError = string.Format("SaveFileThread Error : {0}", e.ToString());
-                            LogMgr.WriteLog(LogMgr.LogType.EXE, strError);
-                        }
+                // 유저 데이터파일 저장
+                using (Stream stream = new FileStream(Global.PATH_DONATION_DATA, FileMode.Create))
+                {
+                    try
+                    {
+                        BinaryFormatter serializer = new BinaryFormatter();
+                        serializer.Serialize(stream, m_listUsers);
+                        LogMgr.WriteLog(LogMgr.LogType.EXE, "SaveFileThread : 유저 데이터 저장 완료");
+
+                        if (eCurType != Global.ListType.None)
+                            BeginInvoke((MethodInvoker)(() => RefreshList(eCurType)));
+                        bIsSuccessed = true;
+                    }
+                    catch (Exception e)
+                    {
+                        string strError = string.Format("SaveFileThread Error : {0}", e.ToString());
+                        LogMgr.WriteLog(LogMgr.LogType.EXE, strError);
                     }
                 }
+
             }
             catch
             {
@@ -225,9 +287,9 @@ namespace BbungBbang
             }
 
             if (m_dlgLoading.InvokeRequired)
-                m_dlgLoading.Invoke(DelegateUpdateControl);
+                m_dlgLoading.Invoke(DelegateUpdateControl, Global.UserDataThreadType.Save, bIsSuccessed);
             else
-                m_dlgLoading.Hide();
+                ThreadSafeUpdateControl(Global.UserDataThreadType.Save, bIsSuccessed);
 
             m_thrFileSave = null;
         }
@@ -345,6 +407,84 @@ namespace BbungBbang
             if (dialogResult == DialogResult.Yes)
             {
                 SaveDonationFile(Global.ListType.None);
+            }
+        }
+
+        /// <summary>
+        /// 유저 목록 - 선택 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void donBtnUserSel_Click(object sender, EventArgs e)
+        {
+            int nCurSelectedIdx = donListUsers.SelectedItems[0].Index;
+            
+            if (nCurSelectedIdx >= 0)
+            {
+                m_nCurSelectedUserIdx = nCurSelectedIdx;
+
+                donEditUserHistoryName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
+                RefreshList(Global.ListType.UserHistory);
+            }
+        }
+
+        /// <summary>
+        /// 유저 목록 - 수정 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void donBtnUserMod_Click(object sender, EventArgs e)
+        {
+            if (m_nCurSelectedUserIdx != Global.USER_IDX_NONE &&
+                donListUsers.Items.Count > m_nCurSelectedUserIdx)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 유저 목록 - 삭제 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void donBtnUserDel_Click(object sender, EventArgs e)
+        {
+            m_nCurSelectedUserIdx = Global.USER_IDX_NONE;
+        }
+
+        /// <summary>
+        /// 헌금 추가 - 추가 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void donBtnNewAdd_Click(object sender, EventArgs e)
+        {
+            if (m_nCurSelectedUserIdx >= Global.USER_IDX_NONE &&
+                donListUsers.Items.Count > m_nCurSelectedUserIdx)
+            {
+                using (InputConfirmDlg dlg = new InputConfirmDlg())
+                {
+                    dlg.SetTitle(Global.InputConfirmType.Add);
+                    dlg.SetData(donEditNewName.Text, donCalendar.SelectionStart.Date, donCBoxNewType.SelectedIndex, donEditNewDon.Text);
+
+                    DialogResult dialogResult = dlg.ShowDialog();
+
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        Donation newDonation = new Donation();
+                        newDonation.DonationTime = donCalendar.SelectionStart.Date;
+                        newDonation.DonationType = (Global.DonationType)donCBoxNewType.SelectedIndex;
+                        newDonation.Money = int.Parse(donEditNewDon.Text);
+                        m_listUsers[m_nCurSelectedUserIdx].Donations.Add(newDonation);
+                        RefreshList(Global.ListType.UserHistory);
+
+                        // Todo 여기서부터하기
+                    }
+                }
             }
         }
     }

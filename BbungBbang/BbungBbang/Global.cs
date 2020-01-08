@@ -24,6 +24,7 @@ namespace BbungBbang
 
         public enum DonationType
         {
+            Tithe,          // 십일조
             Normal,         // 주정 헌금
             Thanks,         // 감사 헌금
             MissonWork,     // 선교 헌금
@@ -39,7 +40,30 @@ namespace BbungBbang
             UserHistory,    // 유저 히스토리 리스트
         }
 
+        public enum UserDataThreadType
+        {
+            Load,           // 데이터 로드
+            Save,           // 데이터 저장
+        }
+
+        public enum InputConfirmType
+        {
+            Modify,         // 수정 확인
+            Add,            // 추가 확인
+        }
+
         public static Color COLOR_BASIC_BLUE = Color.FromArgb(0, 174, 219);
+        public static int USER_IDX_NONE = -1;
+        public static string[] STR_DONATION_TYPE = new string[]
+        {
+            "십일조",
+            "주정",
+            "감사",
+            "선교",
+            "건축",
+            "기타",
+            "절기",
+        };
     }
 
     [Serializable]

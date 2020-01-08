@@ -71,6 +71,42 @@ namespace BbungBbang.Properties {
         }
         
         /// <summary>
+        ///   금액과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_History_Don {
+            get {
+                return ResourceManager.GetString("String_DonInput_History_Don", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   헌금 종류과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_History_DonType {
+            get {
+                return ResourceManager.GetString("String_DonInput_History_DonType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_History_Name {
+            get {
+                return ResourceManager.GetString("String_DonInput_History_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   유저 히스토리과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_History_Title {
+            get {
+                return ResourceManager.GetString("String_DonInput_History_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   변경사항을 전부 저장하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_DonInput_Msg_AllSave {
@@ -85,6 +121,123 @@ namespace BbungBbang.Properties {
         internal static string String_DonInput_Msg_AllSave_Title {
             get {
                 return ResourceManager.GetString("String_DonInput_Msg_AllSave_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   변경사항이 저장되었습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_AllSaveComplete {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_AllSaveComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   변경사항 저장이 실패했습니다.과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_AllSaveFailed {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_AllSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   추가과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Userlist_Btn_Add {
+            get {
+                return ResourceManager.GetString("String_DonInput_Userlist_Btn_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   삭제과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Userlist_Btn_Del {
+            get {
+                return ResourceManager.GetString("String_DonInput_Userlist_Btn_Del", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   수정과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Userlist_Btn_Modify {
+            get {
+                return ResourceManager.GetString("String_DonInput_Userlist_Btn_Modify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   선택과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Userlist_Btn_Select {
+            get {
+                return ResourceManager.GetString("String_DonInput_Userlist_Btn_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   유저 리스트과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Userlist_Title {
+            get {
+                return ResourceManager.GetString("String_DonInput_Userlist_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   추가 확인과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_InputConfirm_Add_Title {
+            get {
+                return ResourceManager.GetString("String_InputConfirm_Add_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   날짜 : 과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_InputConfirm_Date {
+            get {
+                return ResourceManager.GetString("String_InputConfirm_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   금액 : 과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_InputConfirm_Don {
+            get {
+                return ResourceManager.GetString("String_InputConfirm_Don", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   헌금 종류 : 과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_InputConfirm_DonType {
+            get {
+                return ResourceManager.GetString("String_InputConfirm_DonType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   수정 확인과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_InputConfirm_Modify_Title {
+            get {
+                return ResourceManager.GetString("String_InputConfirm_Modify_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   이름 : 과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_InputConfirm_Name {
+            get {
+                return ResourceManager.GetString("String_InputConfirm_Name", resourceCulture);
             }
         }
         
