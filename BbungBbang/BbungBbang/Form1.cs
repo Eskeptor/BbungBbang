@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using StringResource = BbungBbang.Properties.Resources;
 
 namespace BbungBbang
 {
@@ -12,6 +13,7 @@ namespace BbungBbang
         private TabDonationInput m_tabDonationInput = null;     // 헌금 입력 탭
         private TabDonationView m_tabDonationView = null;       // 헌금 현황 탭
         private TabSettings m_tabSettings = null;               // 설정 탭
+        private Global.Page m_eCurPage = Global.Page.Main;      // 현재 페이지 인덱스
 
         public Form1()
         {
@@ -140,19 +142,23 @@ namespace BbungBbang
             switch (nPage)
             {
                 case Global.Page.Main:
+                    m_eCurPage = nPage;
                     mainTab.SelectedTab = mainTabMain;
                     mainBtnBack.Hide();
                     break;
                 case Global.Page.Input:
+                    m_eCurPage = nPage;
                     mainTab.SelectedTab = mainTabInput;
                     m_tabDonationInput.LoadDonationFile();
                     mainBtnBack.Show();
                     break;
                 case Global.Page.Review:
+                    m_eCurPage = nPage;
                     mainTab.SelectedTab = mainTabReview;
                     mainBtnBack.Show();
                     break;
                 case Global.Page.Settings:
+                    m_eCurPage = nPage;
                     mainTab.SelectedTab = mainTabSettings;
                     mainBtnBack.Show();
                     break;
@@ -189,7 +195,37 @@ namespace BbungBbang
         /// <param name="e"></param>
         private void mainBtnBack_Click(object sender, System.EventArgs e)
         {
-            ChangeTabPage(Global.Page.Main);
+            if (m_eCurPage == Global.Page.Input)
+            {
+                if (m_tabDonationInput.GetUserDataChanged())
+                {
+                    DialogResult dialogResult = MessageBox.Show(new Form { TopMost = true }, StringResource.String_DonInput_Msg_UserData_Changed,
+                        StringResource.String_Login_Msg_Warning, MessageBoxButtons.YesNoCancel);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        m_tabDonationInput.SaveDonationFile(Global.ListType.None);
+                        m_tabDonationInput.SetUserDataChanged(false);
+                        ChangeTabPage(Global.Page.Main);
+                    }
+                    else if (dialogResult == DialogResult.Cancel)
+                    {
+
+                    }
+                    else
+                    {
+                        m_tabDonationInput.LoadDonationFile();
+                        m_tabDonationInput.RefreshList(Global.ListType.UserHistory);
+                        m_tabDonationInput.RefreshList(Global.ListType.UserList);
+                        m_tabDonationInput.SetUserDataChanged(false);
+                        ChangeTabPage(Global.Page.Main);
+                    }
+                }
+                else
+                {
+                    ChangeTabPage(Global.Page.Main);
+                }
+            }
         }
     }
 }

@@ -19,14 +19,17 @@ namespace BbungBbang
     {
         delegate void DelegateThreadSafeUpdateControl(Global.UserDataThreadType eType, bool bIsSuccessed);
 
-        private Thread m_thrFileLoad = null;                        // 파일 로드용 스레드
-        private Thread m_thrFileSave = null;                        // 파일 세이브용 스레드
-        private LoadingDlg m_dlgLoading = null;                     // 로딩 창 다이얼로그
-        private List<User> m_listUsers = null;                      // 유저 리스트
-        private string m_strDlgReturns = string.Empty;              // 다른 다이얼로그로부터 받은 데이터
-        private int m_nCurSelectedUserIdx = Global.USER_IDX_NONE;   // 유저 리스트에서 현재 선택된 유저 인덱스
+        private Thread m_thrFileLoad = null;                         // 파일 로드용 스레드
+        private Thread m_thrFileSave = null;                         // 파일 세이브용 스레드
+        private LoadingDlg m_dlgLoading = null;                      // 로딩 창 다이얼로그
+        private List<User> m_listUsers = null;                       // 유저 리스트
+        private string m_strDlgReturns = string.Empty;               // 다른 다이얼로그로부터 받은 데이터
+        private int m_nCurSelectedUserIdx = Global.USER_IDX_NONE;    // 유저 리스트에서 현재 선택된 유저 인덱스
+        private int m_nCurSelectedHistoryIdx = Global.USER_IDX_NONE; // 유저 히스토리에서 현재 선택된 인덱스
+        private bool m_bIsInfoChanged = false;                       // 유저 데이터 변경 유무
 
         private event DelegateThreadSafeUpdateControl DelegateUpdateControl;
+
 
         public TabDonationInput()
         {
@@ -86,9 +89,9 @@ namespace BbungBbang
                 case Global.UserDataThreadType.Save:
                     {
                         if (bIsSuccessed)
-                            MessageBox.Show(StringResource.String_DonInput_Msg_AllSaveComplete, StringResource.String_DonInput_Msg_AllSave_Title);
+                            MessageBox.Show(new Form { TopMost = true }, StringResource.String_DonInput_Msg_AllSaveComplete, StringResource.String_DonInput_Msg_AllSave_Title);
                         else
-                            MessageBox.Show(StringResource.String_DonInput_Msg_AllSaveFailed, StringResource.String_Login_Msg_Warning);
+                            MessageBox.Show(new Form { TopMost = true }, StringResource.String_DonInput_Msg_AllSaveFailed, StringResource.String_Login_Msg_Warning);
                     }
                     break;
             }
@@ -172,7 +175,7 @@ namespace BbungBbang
             catch
             {
                 m_listUsers = new List<User>();
-                MessageBox.Show("Data 폴더를 확인할 수 없습니다.");
+                MessageBox.Show(new Form { TopMost = true }, "Data 폴더를 확인할 수 없습니다.");
                 LogMgr.WriteLog(LogMgr.LogType.EXE, "LoadFileThread : Data 폴더 생성 실패");
             }
 
@@ -188,7 +191,7 @@ namespace BbungBbang
         /// 
         /// </summary>
         /// <param name="eType"></param>
-        private void RefreshList(Global.ListType eType)
+        public void RefreshList(Global.ListType eType)
         {
             switch (eType)
             {
@@ -211,7 +214,7 @@ namespace BbungBbang
                         donListUserHistory.BeginUpdate();
                         foreach (Donation donation in m_listUsers[m_nCurSelectedUserIdx].Donations)
                         {
-                            string[] arrHistory = new string[2] { donation.DonationTime.ToString(), donation.DonationType.ToString() };
+                            string[] arrHistory = new string[2] { donation.DonationTime.ToString("yyyy년 MM월 dd일"), Global.STR_DONATION_TYPE[(int)donation.DonationType] };
                             ListViewItem item = new ListViewItem(arrHistory);
 
                             donListUserHistory.Items.Add(item);
@@ -282,7 +285,7 @@ namespace BbungBbang
             }
             catch
             {
-                MessageBox.Show("Data 폴더를 확인할 수 없습니다.");
+                MessageBox.Show(new Form { TopMost = true }, "Data 폴더를 확인할 수 없습니다.");
                 LogMgr.WriteLog(LogMgr.LogType.EXE, "SaveFileThread : Data 폴더 생성 실패");
             }
 
@@ -387,6 +390,7 @@ namespace BbungBbang
                             m_listUsers.Add(newUser);
                             //SaveDonationFile();
                             RefreshList(Global.ListType.UserList);
+                            m_bIsInfoChanged = true;
                         }
                         m_strDlgReturns = string.Empty;
                     }
@@ -403,10 +407,12 @@ namespace BbungBbang
         {
             LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 저장(버튼 클릭)");
 
-            DialogResult dialogResult = MessageBox.Show(StringResource.String_DonInput_Msg_AllSave, StringResource.String_DonInput_Msg_AllSave_Title, MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show(new Form { TopMost = true }, StringResource.String_DonInput_Msg_AllSave, 
+                StringResource.String_DonInput_Msg_AllSave_Title, MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 SaveDonationFile(Global.ListType.None);
+                m_bIsInfoChanged = false;
             }
         }
 
@@ -424,6 +430,8 @@ namespace BbungBbang
                 m_nCurSelectedUserIdx = nCurSelectedIdx;
 
                 donEditUserHistoryName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
+                donEditNewName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
+
                 RefreshList(Global.ListType.UserHistory);
             }
         }
@@ -438,7 +446,7 @@ namespace BbungBbang
             if (m_nCurSelectedUserIdx != Global.USER_IDX_NONE &&
                 donListUsers.Items.Count > m_nCurSelectedUserIdx)
             {
-
+                m_bIsInfoChanged = true;
             }
             else
             {
@@ -453,7 +461,21 @@ namespace BbungBbang
         /// <param name="e"></param>
         private void donBtnUserDel_Click(object sender, EventArgs e)
         {
-            m_nCurSelectedUserIdx = Global.USER_IDX_NONE;
+            if (m_nCurSelectedUserIdx != Global.USER_IDX_NONE &&
+                m_nCurSelectedUserIdx >= 0 &&
+                m_nCurSelectedUserIdx < m_listUsers.Count)
+            {
+                DialogResult dialogResult = MessageBox.Show(new Form { TopMost = true }, 
+                    string.Format(StringResource.String_DonInput_Msg_UserDelete, m_listUsers[m_nCurSelectedUserIdx].Name),
+                    StringResource.String_Login_Msg_Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    m_listUsers.RemoveAt(m_nCurSelectedUserIdx);
+                    m_nCurSelectedUserIdx = Global.USER_IDX_NONE;
+                    m_bIsInfoChanged = true;
+                }
+            }
+            
         }
 
         /// <summary>
@@ -476,16 +498,68 @@ namespace BbungBbang
                     if (dialogResult == DialogResult.OK)
                     {
                         Donation newDonation = new Donation();
-                        newDonation.DonationTime = donCalendar.SelectionStart.Date;
+                        newDonation.DonationTime = donDateNew.Value;
                         newDonation.DonationType = (Global.DonationType)donCBoxNewType.SelectedIndex;
                         newDonation.Money = int.Parse(donEditNewDon.Text);
                         m_listUsers[m_nCurSelectedUserIdx].Donations.Add(newDonation);
                         RefreshList(Global.ListType.UserHistory);
-
-                        // Todo 여기서부터하기
+                        m_bIsInfoChanged = true;
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 유저 히스토리 - 헌금 목록 리스트 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void donListUserHistory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int nCurSelectedIdx = donListUserHistory.SelectedItems[0].Index;
+
+                if (nCurSelectedIdx >= 0)
+                {
+                    m_nCurSelectedHistoryIdx = nCurSelectedIdx;
+
+                    donCBoxUserHistoryType.SelectedIndex = (int)m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType;
+                    donEditUserHistoryDon.Text = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money.ToString();
+                    donCalendar.SelectionStart = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
+                    donCalendar.SelectionEnd = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
+                }
+            }
+            catch {}
+        }
+
+        private void donBtnUserHistoryMod_Click(object sender, EventArgs e)
+        {
+            // Todo 여기부터
+        }
+
+        private void donBtnUserHistoryDel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        /// <summary>
+        /// 유저 데이터가 변경되었는지 유무를 반환
+        /// </summary>
+        /// <returns>유저 데이터 변경 유무</returns>
+        public bool GetUserDataChanged()
+        {
+            return m_bIsInfoChanged;
+        }
+
+        /// <summary>
+        /// 유저 데이터 변경 상태를 변경
+        /// </summary>
+        /// <param name="bStatus">상태</param>
+        public void SetUserDataChanged(bool bStatus)
+        {
+            m_bIsInfoChanged = bStatus;
         }
     }
 }

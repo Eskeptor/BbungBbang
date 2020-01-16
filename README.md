@@ -6,10 +6,10 @@
  1) 작성중...
  2) C# Winform (.NET Framework 4.7.2)
 ```
-## 업데이트 (2020.1.8) - None Build
+## 업데이트 (2020.1.16) - None Build
 ```
  1) BbungBbang -> DonationInput 기능 구현중
-                  (Donation 추가 및 확인 작성중)
+                  (Donation 데이터 저장 및 리스트 클릭액션 구현)
 ```
 ## 지난 업데이트 기록
 [기록 보기](./UPDATE.md)

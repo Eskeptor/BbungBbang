@@ -1,3 +1,9 @@
+## Update (2020.1.16) - None Build
+```
+ 1) BbungBbang -> DonationInput 기능 구현중
+                  (Donation 데이터 저장 및 리스트 클릭액션 구현)
+```
+
 ## Update (2020.1.8) - None Build
 ```
  1) BbungBbang -> DonationInput 기능 구현중

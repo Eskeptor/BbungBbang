@@ -49,6 +49,8 @@
             this.metroPanel2 = new MetroFramework.Controls.MetroPanel();
             this.donBtnUserMod = new MetroFramework.Controls.MetroButton();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
+            this.donBtnUserHistoryDel = new MetroFramework.Controls.MetroButton();
+            this.donBtnUserHistoryMod = new MetroFramework.Controls.MetroButton();
             this.donLblUserHistoryTitle = new MetroFramework.Controls.MetroLabel();
             this.donEditUserHistoryDon = new MetroFramework.Controls.MetroTextBox();
             this.donLblUserHistoryDon = new MetroFramework.Controls.MetroLabel();
@@ -281,6 +283,7 @@
             this.donEditNewName.MaxLength = 32767;
             this.donEditNewName.Name = "donEditNewName";
             this.donEditNewName.PasswordChar = '\0';
+            this.donEditNewName.ReadOnly = true;
             this.donEditNewName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.donEditNewName.SelectedText = "";
             this.donEditNewName.SelectionLength = 0;
@@ -343,6 +346,8 @@
             // 
             // metroPanel3
             // 
+            this.metroPanel3.Controls.Add(this.donBtnUserHistoryDel);
+            this.metroPanel3.Controls.Add(this.donBtnUserHistoryMod);
             this.metroPanel3.Controls.Add(this.donLblUserHistoryTitle);
             this.metroPanel3.Controls.Add(this.donEditUserHistoryDon);
             this.metroPanel3.Controls.Add(this.donLblUserHistoryDon);
@@ -363,6 +368,28 @@
             this.metroPanel3.VerticalScrollbarBarColor = true;
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
+            // 
+            // donBtnUserHistoryDel
+            // 
+            this.donBtnUserHistoryDel.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.donBtnUserHistoryDel.Location = new System.Drawing.Point(102, 443);
+            this.donBtnUserHistoryDel.Name = "donBtnUserHistoryDel";
+            this.donBtnUserHistoryDel.Size = new System.Drawing.Size(86, 44);
+            this.donBtnUserHistoryDel.TabIndex = 22;
+            this.donBtnUserHistoryDel.Text = "삭제";
+            this.donBtnUserHistoryDel.UseSelectable = true;
+            this.donBtnUserHistoryDel.Click += new System.EventHandler(this.donBtnUserHistoryDel_Click);
+            // 
+            // donBtnUserHistoryMod
+            // 
+            this.donBtnUserHistoryMod.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.donBtnUserHistoryMod.Location = new System.Drawing.Point(10, 443);
+            this.donBtnUserHistoryMod.Name = "donBtnUserHistoryMod";
+            this.donBtnUserHistoryMod.Size = new System.Drawing.Size(86, 44);
+            this.donBtnUserHistoryMod.TabIndex = 21;
+            this.donBtnUserHistoryMod.Text = "수정";
+            this.donBtnUserHistoryMod.UseSelectable = true;
+            this.donBtnUserHistoryMod.Click += new System.EventHandler(this.donBtnUserHistoryMod_Click);
             // 
             // donLblUserHistoryTitle
             // 
@@ -465,6 +492,7 @@
             this.donEditUserHistoryName.MaxLength = 32767;
             this.donEditUserHistoryName.Name = "donEditUserHistoryName";
             this.donEditUserHistoryName.PasswordChar = '\0';
+            this.donEditUserHistoryName.ReadOnly = true;
             this.donEditUserHistoryName.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.donEditUserHistoryName.SelectedText = "";
             this.donEditUserHistoryName.SelectionLength = 0;
@@ -499,6 +527,7 @@
             this.donListUserHistory.UseCompatibleStateImageBehavior = false;
             this.donListUserHistory.UseSelectable = true;
             this.donListUserHistory.View = System.Windows.Forms.View.Details;
+            this.donListUserHistory.SelectedIndexChanged += new System.EventHandler(this.donListUserHistory_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -515,7 +544,7 @@
             this.metroLabel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.metroLabel12.Location = new System.Drawing.Point(3, 26);
             this.metroLabel12.Name = "metroLabel12";
-            this.metroLabel12.Size = new System.Drawing.Size(605, 461);
+            this.metroLabel12.Size = new System.Drawing.Size(605, 468);
             this.metroLabel12.TabIndex = 20;
             // 
             // metroPanel4
@@ -739,5 +768,7 @@
         private MetroFramework.Controls.MetroTextBox donEditNewName;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private MetroFramework.Controls.MetroButton donBtnUserHistoryDel;
+        private MetroFramework.Controls.MetroButton donBtnUserHistoryMod;
     }
 }

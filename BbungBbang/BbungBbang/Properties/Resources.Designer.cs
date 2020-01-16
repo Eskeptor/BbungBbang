@@ -143,6 +143,24 @@ namespace BbungBbang.Properties {
         }
         
         /// <summary>
+        ///   유저 데이터가 변경되었습니다. 저장하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_UserData_Changed {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_UserData_Changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} 의 정보를 전부 삭제하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_UserDelete {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_UserDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   추가과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_DonInput_Userlist_Btn_Add {
