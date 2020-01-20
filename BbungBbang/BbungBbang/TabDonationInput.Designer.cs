@@ -65,7 +65,7 @@
             this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel4 = new MetroFramework.Controls.MetroPanel();
             this.metroLabel8 = new MetroFramework.Controls.MetroLabel();
-            this.metroTextBox3 = new MetroFramework.Controls.MetroTextBox();
+            this.donEditTodayLog = new MetroFramework.Controls.MetroTextBox();
             this.donLblHourMinute = new System.Windows.Forms.Label();
             this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel5 = new MetroFramework.Controls.MetroPanel();
@@ -94,6 +94,7 @@
             this.donListUsers.UseCompatibleStateImageBehavior = false;
             this.donListUsers.UseSelectable = true;
             this.donListUsers.View = System.Windows.Forms.View.List;
+            this.donListUsers.SelectedIndexChanged += new System.EventHandler(this.donListUsers_SelectedIndexChanged);
             // 
             // donLblUserTitle
             // 
@@ -420,7 +421,7 @@
             this.donEditUserHistoryDon.CustomButton.Visible = false;
             this.donEditUserHistoryDon.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.donEditUserHistoryDon.Lines = new string[0];
-            this.donEditUserHistoryDon.Location = new System.Drawing.Point(115, 288);
+            this.donEditUserHistoryDon.Location = new System.Drawing.Point(115, 387);
             this.donEditUserHistoryDon.MaxLength = 32767;
             this.donEditUserHistoryDon.Name = "donEditUserHistoryDon";
             this.donEditUserHistoryDon.PasswordChar = '\0';
@@ -438,7 +439,7 @@
             // donLblUserHistoryDon
             // 
             this.donLblUserHistoryDon.AutoSize = true;
-            this.donLblUserHistoryDon.Location = new System.Drawing.Point(13, 293);
+            this.donLblUserHistoryDon.Location = new System.Drawing.Point(13, 392);
             this.donLblUserHistoryDon.Name = "donLblUserHistoryDon";
             this.donLblUserHistoryDon.Size = new System.Drawing.Size(37, 19);
             this.donLblUserHistoryDon.TabIndex = 17;
@@ -447,7 +448,7 @@
             // donLblUserHistoryDonType
             // 
             this.donLblUserHistoryDonType.AutoSize = true;
-            this.donLblUserHistoryDonType.Location = new System.Drawing.Point(13, 253);
+            this.donLblUserHistoryDonType.Location = new System.Drawing.Point(13, 352);
             this.donLblUserHistoryDonType.Name = "donLblUserHistoryDonType";
             this.donLblUserHistoryDonType.Size = new System.Drawing.Size(69, 19);
             this.donLblUserHistoryDonType.TabIndex = 15;
@@ -457,7 +458,7 @@
             // 
             this.donCBoxUserHistoryType.FormattingEnabled = true;
             this.donCBoxUserHistoryType.ItemHeight = 23;
-            this.donCBoxUserHistoryType.Location = new System.Drawing.Point(115, 248);
+            this.donCBoxUserHistoryType.Location = new System.Drawing.Point(115, 347);
             this.donCBoxUserHistoryType.Name = "donCBoxUserHistoryType";
             this.donCBoxUserHistoryType.Size = new System.Drawing.Size(263, 29);
             this.donCBoxUserHistoryType.TabIndex = 14;
@@ -466,7 +467,7 @@
             // donLblUserHistoryName
             // 
             this.donLblUserHistoryName.AutoSize = true;
-            this.donLblUserHistoryName.Location = new System.Drawing.Point(13, 212);
+            this.donLblUserHistoryName.Location = new System.Drawing.Point(13, 311);
             this.donLblUserHistoryName.Name = "donLblUserHistoryName";
             this.donLblUserHistoryName.Size = new System.Drawing.Size(37, 19);
             this.donLblUserHistoryName.TabIndex = 7;
@@ -488,7 +489,7 @@
             this.donEditUserHistoryName.CustomButton.Visible = false;
             this.donEditUserHistoryName.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.donEditUserHistoryName.Lines = new string[0];
-            this.donEditUserHistoryName.Location = new System.Drawing.Point(115, 208);
+            this.donEditUserHistoryName.Location = new System.Drawing.Point(115, 307);
             this.donEditUserHistoryName.MaxLength = 32767;
             this.donEditUserHistoryName.Name = "donEditUserHistoryName";
             this.donEditUserHistoryName.PasswordChar = '\0';
@@ -522,7 +523,7 @@
             this.donListUserHistory.MultiSelect = false;
             this.donListUserHistory.Name = "donListUserHistory";
             this.donListUserHistory.OwnerDraw = true;
-            this.donListUserHistory.Size = new System.Drawing.Size(375, 162);
+            this.donListUserHistory.Size = new System.Drawing.Size(375, 263);
             this.donListUserHistory.TabIndex = 3;
             this.donListUserHistory.UseCompatibleStateImageBehavior = false;
             this.donListUserHistory.UseSelectable = true;
@@ -550,7 +551,7 @@
             // metroPanel4
             // 
             this.metroPanel4.Controls.Add(this.metroLabel8);
-            this.metroPanel4.Controls.Add(this.metroTextBox3);
+            this.metroPanel4.Controls.Add(this.donEditTodayLog);
             this.metroPanel4.HorizontalScrollbarBarColor = true;
             this.metroPanel4.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel4.HorizontalScrollbarSize = 10;
@@ -575,36 +576,36 @@
             this.metroLabel8.UseCustomBackColor = true;
             this.metroLabel8.UseCustomForeColor = true;
             // 
-            // metroTextBox3
+            // donEditTodayLog
             // 
             // 
             // 
             // 
-            this.metroTextBox3.CustomButton.Image = null;
-            this.metroTextBox3.CustomButton.Location = new System.Drawing.Point(389, 2);
-            this.metroTextBox3.CustomButton.Name = "";
-            this.metroTextBox3.CustomButton.Size = new System.Drawing.Size(213, 213);
-            this.metroTextBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.metroTextBox3.CustomButton.TabIndex = 1;
-            this.metroTextBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.metroTextBox3.CustomButton.UseSelectable = true;
-            this.metroTextBox3.CustomButton.Visible = false;
-            this.metroTextBox3.Lines = new string[0];
-            this.metroTextBox3.Location = new System.Drawing.Point(3, 26);
-            this.metroTextBox3.MaxLength = 32767;
-            this.metroTextBox3.Multiline = true;
-            this.metroTextBox3.Name = "metroTextBox3";
-            this.metroTextBox3.PasswordChar = '\0';
-            this.metroTextBox3.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.metroTextBox3.SelectedText = "";
-            this.metroTextBox3.SelectionLength = 0;
-            this.metroTextBox3.SelectionStart = 0;
-            this.metroTextBox3.ShortcutsEnabled = true;
-            this.metroTextBox3.Size = new System.Drawing.Size(605, 218);
-            this.metroTextBox3.TabIndex = 6;
-            this.metroTextBox3.UseSelectable = true;
-            this.metroTextBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.metroTextBox3.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.donEditTodayLog.CustomButton.Image = null;
+            this.donEditTodayLog.CustomButton.Location = new System.Drawing.Point(389, 2);
+            this.donEditTodayLog.CustomButton.Name = "";
+            this.donEditTodayLog.CustomButton.Size = new System.Drawing.Size(213, 213);
+            this.donEditTodayLog.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.donEditTodayLog.CustomButton.TabIndex = 1;
+            this.donEditTodayLog.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.donEditTodayLog.CustomButton.UseSelectable = true;
+            this.donEditTodayLog.CustomButton.Visible = false;
+            this.donEditTodayLog.Lines = new string[0];
+            this.donEditTodayLog.Location = new System.Drawing.Point(3, 26);
+            this.donEditTodayLog.MaxLength = 32767;
+            this.donEditTodayLog.Multiline = true;
+            this.donEditTodayLog.Name = "donEditTodayLog";
+            this.donEditTodayLog.PasswordChar = '\0';
+            this.donEditTodayLog.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.donEditTodayLog.SelectedText = "";
+            this.donEditTodayLog.SelectionLength = 0;
+            this.donEditTodayLog.SelectionStart = 0;
+            this.donEditTodayLog.ShortcutsEnabled = true;
+            this.donEditTodayLog.Size = new System.Drawing.Size(605, 218);
+            this.donEditTodayLog.TabIndex = 6;
+            this.donEditTodayLog.UseSelectable = true;
+            this.donEditTodayLog.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.donEditTodayLog.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // donLblHourMinute
             // 
@@ -745,7 +746,7 @@
         private MetroFramework.Controls.MetroListView donListUserHistory;
         private MetroFramework.Controls.MetroLabel donLblUserHistoryTitle;
         private MetroFramework.Controls.MetroPanel metroPanel4;
-        private MetroFramework.Controls.MetroTextBox metroTextBox3;
+        private MetroFramework.Controls.MetroTextBox donEditTodayLog;
         private MetroFramework.Controls.MetroLabel metroLabel8;
         private MetroFramework.Controls.MetroTextBox donEditUserHistoryDon;
         private MetroFramework.Controls.MetroLabel donLblUserHistoryDon;

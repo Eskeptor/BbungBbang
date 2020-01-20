@@ -143,6 +143,15 @@ namespace BbungBbang.Properties {
         }
         
         /// <summary>
+        ///   해당 히스토리를 삭제하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
+        /// </summary>
+        internal static string String_DonInput_Msg_HistoryDelete {
+            get {
+                return ResourceManager.GetString("String_DonInput_Msg_HistoryDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   유저 데이터가 변경되었습니다. 저장하시겠습니까?과(와) 유사한 지역화된 문자열을 찾습니다.
         /// </summary>
         internal static string String_DonInput_Msg_UserData_Changed {

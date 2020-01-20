@@ -69,6 +69,14 @@ namespace BbungBbang
 
             donCBoxNewType.Items.AddRange(Global.STR_DONATION_TYPE);
             donCBoxUserHistoryType.Items.AddRange(Global.STR_DONATION_TYPE);
+
+            // 버튼 초기화
+            donBtnUserSel.Enabled = false;
+            donBtnUserMod.Enabled = false;
+            donBtnUserDel.Enabled = false;
+            donBtnUserHistoryMod.Enabled = false;
+            donBtnUserHistoryDel.Enabled = false;
+            donBtnNewAdd.Enabled = false;
         }
 
         /// <summary>
@@ -423,6 +431,8 @@ namespace BbungBbang
         /// <param name="e"></param>
         private void donBtnUserSel_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 선택(버튼 클릭)");
+
             int nCurSelectedIdx = donListUsers.SelectedItems[0].Index;
             
             if (nCurSelectedIdx >= 0)
@@ -433,6 +443,12 @@ namespace BbungBbang
                 donEditNewName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
 
                 RefreshList(Global.ListType.UserHistory);
+
+                donBtnUserMod.Enabled = true;
+                donBtnUserDel.Enabled = true;
+                donBtnNewAdd.Enabled = true;
+
+                LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("선택된 유저 : {0}", donEditUserHistoryName.Text));
             }
         }
 
@@ -443,6 +459,8 @@ namespace BbungBbang
         /// <param name="e"></param>
         private void donBtnUserMod_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 수정(버튼 클릭)");
+
             if (m_nCurSelectedUserIdx != Global.USER_IDX_NONE &&
                 donListUsers.Items.Count > m_nCurSelectedUserIdx)
             {
@@ -461,18 +479,28 @@ namespace BbungBbang
         /// <param name="e"></param>
         private void donBtnUserDel_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 삭제(버튼 클릭)");
+
             if (m_nCurSelectedUserIdx != Global.USER_IDX_NONE &&
                 m_nCurSelectedUserIdx >= 0 &&
                 m_nCurSelectedUserIdx < m_listUsers.Count)
             {
                 DialogResult dialogResult = MessageBox.Show(new Form { TopMost = true }, 
                     string.Format(StringResource.String_DonInput_Msg_UserDelete, m_listUsers[m_nCurSelectedUserIdx].Name),
-                    StringResource.String_Login_Msg_Warning);
+                    StringResource.String_Login_Msg_Warning,
+                    MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
+                    LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 삭제(삭제 완료)");
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("삭제된 유저 : {0}", m_listUsers[m_nCurSelectedUserIdx].Name));
+
                     m_listUsers.RemoveAt(m_nCurSelectedUserIdx);
                     m_nCurSelectedUserIdx = Global.USER_IDX_NONE;
                     m_bIsInfoChanged = true;
+                }
+                else
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 삭제(삭제 취소)");
                 }
             }
             
@@ -485,13 +513,15 @@ namespace BbungBbang
         /// <param name="e"></param>
         private void donBtnNewAdd_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 헌금 추가 - 추가(버튼 클릭)");
+
             if (m_nCurSelectedUserIdx >= Global.USER_IDX_NONE &&
                 donListUsers.Items.Count > m_nCurSelectedUserIdx)
             {
                 using (InputConfirmDlg dlg = new InputConfirmDlg())
                 {
                     dlg.SetTitle(Global.InputConfirmType.Add);
-                    dlg.SetData(donEditNewName.Text, donCalendar.SelectionStart.Date, donCBoxNewType.SelectedIndex, donEditNewDon.Text);
+                    dlg.SetData(donEditNewName.Text, donDateNew.Value, donCBoxNewType.SelectedIndex, donEditNewDon.Text);
 
                     DialogResult dialogResult = dlg.ShowDialog();
 
@@ -504,6 +534,16 @@ namespace BbungBbang
                         m_listUsers[m_nCurSelectedUserIdx].Donations.Add(newDonation);
                         RefreshList(Global.ListType.UserHistory);
                         m_bIsInfoChanged = true;
+
+                        LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 헌금 추가 - 추가(추가 완료)");
+                        LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("추가({0}, {1}, {2})", 
+                            donDateNew.Value.ToString("yyyy-MM-dd"),
+                            donEditNewDon.Text,
+                            donCBoxNewType.SelectedIndex));
+                    }
+                    else
+                    {
+                        LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 헌금 추가 - 추가(추가 취소)");
                     }
                 }
             }
@@ -528,19 +568,97 @@ namespace BbungBbang
                     donEditUserHistoryDon.Text = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money.ToString();
                     donCalendar.SelectionStart = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
                     donCalendar.SelectionEnd = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
+
+                    donBtnUserHistoryMod.Enabled = true;
+                    donBtnUserHistoryDel.Enabled = true;
                 }
             }
-            catch {}
+            catch 
+            {
+                donBtnUserHistoryMod.Enabled = false;
+                donBtnUserHistoryDel.Enabled = false;
+            }
         }
 
+        /// <summary>
+        /// 유저 히스토리 - 수정 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void donBtnUserHistoryMod_Click(object sender, EventArgs e)
         {
-            // Todo 여기부터
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 히스토리 - 수정(버튼 클릭)");
+
+            if (m_nCurSelectedHistoryIdx > Global.USER_IDX_NONE)
+            {
+                using (InputConfirmDlg dlg = new InputConfirmDlg())
+                {
+                    dlg.SetTitle(Global.InputConfirmType.Modify);
+                    dlg.SetData(donEditUserHistoryName.Text, donCalendar.SelectionStart.Date, 
+                        donCBoxUserHistoryType.SelectedIndex, donEditUserHistoryDon.Text);
+
+                    DialogResult dialogResult = dlg.ShowDialog();
+
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 히스토리 - 수정(수정 완료)");
+                        LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("수정전({0}, {1}, {2}) -> 수정후({3}, {4}, {5})",
+                            m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime.ToString("yyyy-MM-dd"),
+                            m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money,
+                            (int)m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType,
+                            donCalendar.SelectionStart.ToString("yyyy-MM-dd"),
+                            donEditUserHistoryDon.Text,
+                            donCBoxUserHistoryType.SelectedIndex));
+
+
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType = (Global.DonationType)donCBoxUserHistoryType.SelectedIndex;
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money = int.Parse(donEditUserHistoryDon.Text);
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime = donCalendar.SelectionStart;
+                        RefreshList(Global.ListType.UserHistory);
+                        m_bIsInfoChanged = true;
+                    }
+                    else
+                    {
+                        LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 히스토리 - 수정(수정 취소)");
+                    }
+                }
+            }
         }
 
+        /// <summary>
+        /// 유저 히스토리 - 삭제 버튼
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void donBtnUserHistoryDel_Click(object sender, EventArgs e)
         {
+            LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 히스토리 - 삭제(버튼 클릭)");
 
+            if (m_nCurSelectedHistoryIdx > Global.USER_IDX_NONE)
+            {
+                DialogResult dialogResult = MessageBox.Show(StringResource.String_DonInput_Msg_HistoryDelete,
+                    StringResource.String_Login_Msg_Warning, MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 히스토리 - 삭제(삭제 완료)");
+                    LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("삭제된 히스토리({0}, {1}, {2})", 
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime.ToString("yyyy-MM-dd"),
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money,
+                        (int)m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType));
+
+                    m_listUsers[m_nCurSelectedUserIdx].Donations.RemoveAt(m_nCurSelectedHistoryIdx);
+                    m_nCurSelectedHistoryIdx = Global.USER_IDX_NONE;
+                    donCBoxUserHistoryType.SelectedIndex = 0;
+                    donEditUserHistoryDon.Text = string.Empty;
+                    RefreshList(Global.ListType.UserHistory);
+                    m_bIsInfoChanged = true;
+                }
+                else
+                {
+                    LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 히스토리 - 삭제(삭제 취소)");
+                }
+            }
         }
 
 
@@ -560,6 +678,29 @@ namespace BbungBbang
         public void SetUserDataChanged(bool bStatus)
         {
             m_bIsInfoChanged = bStatus;
+        }
+
+
+        /// <summary>
+        /// 유저 목록 - 유저 목록 리스트 클릭 이벤트
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void donListUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int nCurSelectedIdx = donListUsers.SelectedItems[0].Index;
+
+                if (nCurSelectedIdx >= 0)
+                {
+                    donBtnUserSel.Enabled = true;
+                }
+            }
+            catch
+            {
+                donBtnUserSel.Enabled = false;
+            }
         }
     }
 }

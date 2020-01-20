@@ -1,3 +1,12 @@
+## Update (2020.1.20) - None Build
+```
+ 1) BbungBbang -> DonationInput 기능 구현중
+                  ㄴ 유저 데이터 선택, 추가, 삭제 기능 구현
+				  ㄴ 각 버튼 클릭시 Log 추가
+				  ㄴ 각 연산 부분 Log 추가
+				  ㄴ 유저 히스토리 수정, 삭제 기능 구현
+```
+
 ## Update (2020.1.16) - None Build
 ```
  1) BbungBbang -> DonationInput 기능 구현중
