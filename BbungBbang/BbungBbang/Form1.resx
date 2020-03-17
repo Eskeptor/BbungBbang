@@ -120,10 +120,10 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="mainBtnBack.TileImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAACCSURBVEhL7ZQxCoAwEATzG99jZ2XnHyx9uBgnsAdpbGQvIDhwRZYwC9Gk/HyLWuvB7Fp6kbxx
-        MZNiDwh7+abYA8Jevir2gHCI/GQWxR4Q9vJZsQeEIX+FNM+wJ7egwb68IwoQ533kAHGUtN90SIn3LgSI
-        h5d4H7sAcSvJea5/kijlBgjwPY+zgqGtAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAIJJREFUSEvt
+        lDEKgDAQBPMb32NnZecfLH24GCewB2lsZC8gOHBFljAL0aT8fIta68HsWnqRvHExk2IPCHv5ptgDwl6+
+        KvaAcIj8ZBbFHhD28lmxB4Qhf4U0z7Ant6DBvrwjChDnfeQAcZS033RIifcuBIiHl3gfuwBxK8l5rn+S
+        KOUGCPA9j7OCoa0AAAAASUVORK5CYII=
 </value>
   </data>
 </root>

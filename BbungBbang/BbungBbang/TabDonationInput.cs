@@ -22,11 +22,11 @@ namespace BbungBbang
         private Thread m_thrFileLoad = null;                         // 파일 로드용 스레드
         private Thread m_thrFileSave = null;                         // 파일 세이브용 스레드
         private LoadingDlg m_dlgLoading = null;                      // 로딩 창 다이얼로그
-        private List<User> m_listUsers = null;                       // 유저 리스트
         private string m_strDlgReturns = string.Empty;               // 다른 다이얼로그로부터 받은 데이터
         private int m_nCurSelectedUserIdx = Global.USER_IDX_NONE;    // 유저 리스트에서 현재 선택된 유저 인덱스
         private int m_nCurSelectedHistoryIdx = Global.USER_IDX_NONE; // 유저 히스토리에서 현재 선택된 인덱스
         private bool m_bIsInfoChanged = false;                       // 유저 데이터 변경 유무
+        public List<User> m_listUsers = null;                        // 유저 리스트
 
         private event DelegateThreadSafeUpdateControl DelegateUpdateControl;
 

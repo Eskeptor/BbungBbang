@@ -226,6 +226,19 @@ namespace BbungBbang
                     ChangeTabPage(Global.Page.Main);
                 }
             }
+            else if (m_eCurPage == Global.Page.Review)
+            {
+                ChangeTabPage(Global.Page.Main);
+            }
+            else if (m_eCurPage == Global.Page.Settings)
+            {
+                ChangeTabPage(Global.Page.Main);
+            }
+        }
+
+        private void Form1_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

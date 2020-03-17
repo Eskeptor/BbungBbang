@@ -52,7 +52,7 @@
             this.mainTab.Multiline = true;
             this.mainTab.Name = "mainTab";
             this.mainTab.SelectedIndex = 0;
-            this.mainTab.Size = new System.Drawing.Size(1280, 935);
+            this.mainTab.Size = new System.Drawing.Size(1280, 958);
             this.mainTab.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.mainTab.Style = MetroFramework.MetroColorStyle.White;
             this.mainTab.TabIndex = 0;
@@ -65,7 +65,7 @@
             this.mainTabMain.HorizontalScrollbarSize = 10;
             this.mainTabMain.Location = new System.Drawing.Point(4, 8);
             this.mainTabMain.Name = "mainTabMain";
-            this.mainTabMain.Size = new System.Drawing.Size(1272, 923);
+            this.mainTabMain.Size = new System.Drawing.Size(1272, 946);
             this.mainTabMain.TabIndex = 3;
             this.mainTabMain.Text = "mainTabMain";
             this.mainTabMain.VerticalScrollbarBarColor = true;
@@ -140,6 +140,7 @@
             this.Text = "Form1";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.mainTab.ResumeLayout(false);
             this.ResumeLayout(false);
 

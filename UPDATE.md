@@ -1,3 +1,8 @@
+## Update (2020.3.17) - None Build
+```
+ 1) BbungBbang -> DonationView 화면 작성중
+```
+
 ## Update (2020.1.20) - None Build
 ```
  1) BbungBbang -> DonationInput 기능 구현중

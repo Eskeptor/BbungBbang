@@ -74,11 +74,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.donBtnAllSave = new MetroFramework.Controls.MetroButton();
             this.donTimerCurTime = new System.Windows.Forms.Timer(this.components);
+            this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
             this.metroPanel4.SuspendLayout();
             this.metroPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // donListUsers
@@ -93,6 +96,7 @@
             this.donListUsers.TabIndex = 0;
             this.donListUsers.UseCompatibleStateImageBehavior = false;
             this.donListUsers.UseSelectable = true;
+            this.donListUsers.UseStyleColors = true;
             this.donListUsers.View = System.Windows.Forms.View.List;
             this.donListUsers.SelectedIndexChanged += new System.EventHandler(this.donListUsers_SelectedIndexChanged);
             // 
@@ -527,6 +531,7 @@
             this.donListUserHistory.TabIndex = 3;
             this.donListUserHistory.UseCompatibleStateImageBehavior = false;
             this.donListUserHistory.UseSelectable = true;
+            this.donListUserHistory.UseStyleColors = true;
             this.donListUserHistory.View = System.Windows.Forms.View.Details;
             this.donListUserHistory.SelectedIndexChanged += new System.EventHandler(this.donListUserHistory_SelectedIndexChanged);
             // 
@@ -609,6 +614,7 @@
             // 
             // donLblHourMinute
             // 
+            this.donLblHourMinute.BackColor = System.Drawing.Color.Transparent;
             this.donLblHourMinute.Font = new System.Drawing.Font("Arial", 44.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.donLblHourMinute.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.donLblHourMinute.Location = new System.Drawing.Point(76, 6);
@@ -645,6 +651,7 @@
             // donLblDate
             // 
             this.donLblDate.AutoSize = true;
+            this.donLblDate.BackColor = System.Drawing.Color.Transparent;
             this.donLblDate.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.donLblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.donLblDate.Location = new System.Drawing.Point(17, 76);
@@ -694,6 +701,18 @@
             // 
             this.donTimerCurTime.Tick += new System.EventHandler(this.donTimerCurTime_Tick);
             // 
+            // metroStyleManager1
+            // 
+            this.metroStyleManager1.Owner = this;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.metroLabel1.Location = new System.Drawing.Point(-13, -16);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(1295, 953);
+            this.metroLabel1.TabIndex = 23;
+            // 
             // TabDonationInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -708,6 +727,7 @@
             this.Controls.Add(this.metroPanel3);
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroPanel1);
+            this.Controls.Add(this.metroLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TabDonationInput";
             this.Text = "TabDonationInput";
@@ -720,6 +740,7 @@
             this.metroPanel4.ResumeLayout(false);
             this.metroPanel5.ResumeLayout(false);
             this.metroPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -771,5 +792,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private MetroFramework.Controls.MetroButton donBtnUserHistoryDel;
         private MetroFramework.Controls.MetroButton donBtnUserHistoryMod;
+        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }
