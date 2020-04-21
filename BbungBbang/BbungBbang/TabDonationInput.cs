@@ -54,29 +54,29 @@ namespace BbungBbang
         private void InitControls()
         {
             // 유저 리스트
-            donListUsers.Columns.Add("이름", donListUsers.Size.Width);
-            donLblUserTitle.Text = StringResource.String_DonInput_Userlist_Title;
-            donBtnUserSel.Text = StringResource.String_DonInput_Userlist_Btn_Select;
-            donBtnUserAdd.Text = StringResource.String_DonInput_Userlist_Btn_Add;
-            donBtnUserMod.Text = StringResource.String_DonInput_Userlist_Btn_Modify;
-            donBtnUserDel.Text = StringResource.String_DonInput_Userlist_Btn_Del;
+            listUser.Columns.Add("이름", listUser.Size.Width);
+            lblUserTitle.Text = StringResource.String_DonInput_Userlist_Title;
+            btnUserSel.Text = StringResource.String_DonInput_Userlist_Btn_Select;
+            btnUserAdd.Text = StringResource.String_DonInput_Userlist_Btn_Add;
+            btnUserMod.Text = StringResource.String_DonInput_Userlist_Btn_Modify;
+            btnUserDel.Text = StringResource.String_DonInput_Userlist_Btn_Del;
 
             // 유저 히스토리
-            donLblUserHistoryTitle.Text = StringResource.String_DonInput_History_Title;
-            donLblUserHistoryName.Text = StringResource.String_DonInput_History_Name;
-            donLblUserHistoryDonType.Text = StringResource.String_DonInput_History_DonType;
-            donLblUserHistoryDon.Text = StringResource.String_DonInput_History_Don;
+            lblHistoryTitle.Text = StringResource.String_DonInput_History_Title;
+            lblHistoryName.Text = StringResource.String_DonInput_History_Name;
+            lblHistoryDonType.Text = StringResource.String_DonInput_History_DonType;
+            lblHistoryDon.Text = StringResource.String_DonInput_History_Don;
 
-            donCBoxNewType.Items.AddRange(Global.STR_DONATION_TYPE);
-            donCBoxUserHistoryType.Items.AddRange(Global.STR_DONATION_TYPE);
+            cboxNewType.Items.AddRange(Global.STR_DONATION_TYPE);
+            cboxHistoryType.Items.AddRange(Global.STR_DONATION_TYPE);
 
             // 버튼 초기화
-            donBtnUserSel.Enabled = false;
-            donBtnUserMod.Enabled = false;
-            donBtnUserDel.Enabled = false;
-            donBtnUserHistoryMod.Enabled = false;
-            donBtnUserHistoryDel.Enabled = false;
-            donBtnNewAdd.Enabled = false;
+            btnUserSel.Enabled = false;
+            btnUserMod.Enabled = false;
+            btnUserDel.Enabled = false;
+            btnHistoryMod.Enabled = false;
+            btnHistoryDel.Enabled = false;
+            btnNewAdd.Enabled = false;
         }
 
         /// <summary>
@@ -205,29 +205,29 @@ namespace BbungBbang
             {
                 case Global.ListType.UserList:
                     {
-                        donListUsers.Items.Clear();
+                        listUser.Items.Clear();
 
-                        donListUsers.BeginUpdate();
+                        listUser.BeginUpdate();
                         foreach (User user in m_listUsers)
                         {
-                            donListUsers.Items.Add(user.Name);
+                            listUser.Items.Add(user.Name);
                         }
-                        donListUsers.EndUpdate();
+                        listUser.EndUpdate();
                     }
                     break;
                 case Global.ListType.UserHistory:
                     {
-                        donListUserHistory.Items.Clear();
+                        listHistory.Items.Clear();
 
-                        donListUserHistory.BeginUpdate();
+                        listHistory.BeginUpdate();
                         foreach (Donation donation in m_listUsers[m_nCurSelectedUserIdx].Donations)
                         {
                             string[] arrHistory = new string[2] { donation.DonationTime.ToString("yyyy년 MM월 dd일"), Global.STR_DONATION_TYPE[(int)donation.DonationType] };
                             ListViewItem item = new ListViewItem(arrHistory);
 
-                            donListUserHistory.Items.Add(item);
+                            listHistory.Items.Add(item);
                         }
-                        donListUserHistory.EndUpdate();
+                        listHistory.EndUpdate();
                     }
                     break;
             }
@@ -352,16 +352,16 @@ namespace BbungBbang
 
             if (dateTime.Hour > 12)
             {
-                donLblPMAM.Text = StringResource.String_Time_PM;
-                donLblHourMinute.Text = string.Format("{0}:{1}", dateTime.Hour - 12, dateTime.Minute);
+                lblPMAM.Text = StringResource.String_Time_PM;
+                lblHourMinute.Text = string.Format("{0}:{1}", dateTime.Hour - 12, dateTime.Minute);
             }
             else
             {
-                donLblPMAM.Text = StringResource.String_Time_AM;
-                donLblHourMinute.Text = string.Format("{0}:{1}", dateTime.Hour, dateTime.Minute);
+                lblPMAM.Text = StringResource.String_Time_AM;
+                lblHourMinute.Text = string.Format("{0}:{1}", dateTime.Hour, dateTime.Minute);
             }
 
-            donLblDate.Text = string.Format("{0}년 {1}월 {2}일", dateTime.Year, dateTime.Month, dateTime.Day);
+            lblDate.Text = string.Format("{0}년 {1}월 {2}일", dateTime.Year, dateTime.Month, dateTime.Day);
         }
 
         /// <summary>
@@ -433,22 +433,22 @@ namespace BbungBbang
         {
             LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 선택(버튼 클릭)");
 
-            int nCurSelectedIdx = donListUsers.SelectedItems[0].Index;
+            int nCurSelectedIdx = listUser.SelectedItems[0].Index;
             
             if (nCurSelectedIdx >= 0)
             {
                 m_nCurSelectedUserIdx = nCurSelectedIdx;
 
-                donEditUserHistoryName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
-                donEditNewName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
+                editHistoryName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
+                editNewName.Text = m_listUsers[m_nCurSelectedUserIdx].Name;
 
                 RefreshList(Global.ListType.UserHistory);
 
-                donBtnUserMod.Enabled = true;
-                donBtnUserDel.Enabled = true;
-                donBtnNewAdd.Enabled = true;
+                btnUserMod.Enabled = true;
+                btnUserDel.Enabled = true;
+                btnNewAdd.Enabled = true;
 
-                LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("선택된 유저 : {0}", donEditUserHistoryName.Text));
+                LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("선택된 유저 : {0}", editHistoryName.Text));
             }
         }
 
@@ -462,7 +462,7 @@ namespace BbungBbang
             LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 유저 목록 - 수정(버튼 클릭)");
 
             if (m_nCurSelectedUserIdx != Global.USER_IDX_NONE &&
-                donListUsers.Items.Count > m_nCurSelectedUserIdx)
+                listUser.Items.Count > m_nCurSelectedUserIdx)
             {
                 m_bIsInfoChanged = true;
             }
@@ -516,30 +516,30 @@ namespace BbungBbang
             LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 헌금 추가 - 추가(버튼 클릭)");
 
             if (m_nCurSelectedUserIdx >= Global.USER_IDX_NONE &&
-                donListUsers.Items.Count > m_nCurSelectedUserIdx)
+                listUser.Items.Count > m_nCurSelectedUserIdx)
             {
                 using (InputConfirmDlg dlg = new InputConfirmDlg())
                 {
                     dlg.SetTitle(Global.InputConfirmType.Add);
-                    dlg.SetData(donEditNewName.Text, donDateNew.Value, donCBoxNewType.SelectedIndex, donEditNewDon.Text);
+                    dlg.SetData(editNewName.Text, dateTimeNew.Value, cboxNewType.SelectedIndex, editNewDon.Text);
 
                     DialogResult dialogResult = dlg.ShowDialog();
 
                     if (dialogResult == DialogResult.OK)
                     {
                         Donation newDonation = new Donation();
-                        newDonation.DonationTime = donDateNew.Value;
-                        newDonation.DonationType = (Global.DonationType)donCBoxNewType.SelectedIndex;
-                        newDonation.Money = int.Parse(donEditNewDon.Text);
+                        newDonation.DonationTime = dateTimeNew.Value;
+                        newDonation.DonationType = (Global.DonationType)cboxNewType.SelectedIndex;
+                        newDonation.Money = int.Parse(editNewDon.Text);
                         m_listUsers[m_nCurSelectedUserIdx].Donations.Add(newDonation);
                         RefreshList(Global.ListType.UserHistory);
                         m_bIsInfoChanged = true;
 
                         LogMgr.WriteLog(LogMgr.LogType.GUI, "헌금 기입 - 헌금 추가 - 추가(추가 완료)");
                         LogMgr.WriteLog(LogMgr.LogType.EXE, string.Format("추가({0}, {1}, {2})", 
-                            donDateNew.Value.ToString("yyyy-MM-dd"),
-                            donEditNewDon.Text,
-                            donCBoxNewType.SelectedIndex));
+                            dateTimeNew.Value.ToString("yyyy-MM-dd"),
+                            editNewDon.Text,
+                            cboxNewType.SelectedIndex));
                     }
                     else
                     {
@@ -558,25 +558,25 @@ namespace BbungBbang
         {
             try
             {
-                int nCurSelectedIdx = donListUserHistory.SelectedItems[0].Index;
+                int nCurSelectedIdx = listHistory.SelectedItems[0].Index;
 
                 if (nCurSelectedIdx >= 0)
                 {
                     m_nCurSelectedHistoryIdx = nCurSelectedIdx;
 
-                    donCBoxUserHistoryType.SelectedIndex = (int)m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType;
-                    donEditUserHistoryDon.Text = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money.ToString();
-                    donCalendar.SelectionStart = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
-                    donCalendar.SelectionEnd = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
+                    cboxHistoryType.SelectedIndex = (int)m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType;
+                    editHistoryDon.Text = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money.ToString();
+                    calendarHistory.SelectionStart = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
+                    calendarHistory.SelectionEnd = m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime;
 
-                    donBtnUserHistoryMod.Enabled = true;
-                    donBtnUserHistoryDel.Enabled = true;
+                    btnHistoryMod.Enabled = true;
+                    btnHistoryDel.Enabled = true;
                 }
             }
             catch 
             {
-                donBtnUserHistoryMod.Enabled = false;
-                donBtnUserHistoryDel.Enabled = false;
+                btnHistoryMod.Enabled = false;
+                btnHistoryDel.Enabled = false;
             }
         }
 
@@ -594,8 +594,8 @@ namespace BbungBbang
                 using (InputConfirmDlg dlg = new InputConfirmDlg())
                 {
                     dlg.SetTitle(Global.InputConfirmType.Modify);
-                    dlg.SetData(donEditUserHistoryName.Text, donCalendar.SelectionStart.Date, 
-                        donCBoxUserHistoryType.SelectedIndex, donEditUserHistoryDon.Text);
+                    dlg.SetData(editHistoryName.Text, calendarHistory.SelectionStart.Date, 
+                        cboxHistoryType.SelectedIndex, editHistoryDon.Text);
 
                     DialogResult dialogResult = dlg.ShowDialog();
 
@@ -606,14 +606,14 @@ namespace BbungBbang
                             m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime.ToString("yyyy-MM-dd"),
                             m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money,
                             (int)m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType,
-                            donCalendar.SelectionStart.ToString("yyyy-MM-dd"),
-                            donEditUserHistoryDon.Text,
-                            donCBoxUserHistoryType.SelectedIndex));
+                            calendarHistory.SelectionStart.ToString("yyyy-MM-dd"),
+                            editHistoryDon.Text,
+                            cboxHistoryType.SelectedIndex));
 
 
-                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType = (Global.DonationType)donCBoxUserHistoryType.SelectedIndex;
-                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money = int.Parse(donEditUserHistoryDon.Text);
-                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime = donCalendar.SelectionStart;
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationType = (Global.DonationType)cboxHistoryType.SelectedIndex;
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].Money = int.Parse(editHistoryDon.Text);
+                        m_listUsers[m_nCurSelectedUserIdx].Donations[m_nCurSelectedHistoryIdx].DonationTime = calendarHistory.SelectionStart;
                         RefreshList(Global.ListType.UserHistory);
                         m_bIsInfoChanged = true;
                     }
@@ -649,8 +649,8 @@ namespace BbungBbang
 
                     m_listUsers[m_nCurSelectedUserIdx].Donations.RemoveAt(m_nCurSelectedHistoryIdx);
                     m_nCurSelectedHistoryIdx = Global.USER_IDX_NONE;
-                    donCBoxUserHistoryType.SelectedIndex = 0;
-                    donEditUserHistoryDon.Text = string.Empty;
+                    cboxHistoryType.SelectedIndex = 0;
+                    editHistoryDon.Text = string.Empty;
                     RefreshList(Global.ListType.UserHistory);
                     m_bIsInfoChanged = true;
                 }
@@ -690,16 +690,16 @@ namespace BbungBbang
         {
             try
             {
-                int nCurSelectedIdx = donListUsers.SelectedItems[0].Index;
+                int nCurSelectedIdx = listUser.SelectedItems[0].Index;
 
                 if (nCurSelectedIdx >= 0)
                 {
-                    donBtnUserSel.Enabled = true;
+                    btnUserSel.Enabled = true;
                 }
             }
             catch
             {
-                donBtnUserSel.Enabled = false;
+                btnUserSel.Enabled = false;
             }
         }
     }

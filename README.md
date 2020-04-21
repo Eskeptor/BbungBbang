@@ -6,9 +6,10 @@
  1) 작성중...
  2) C# Winform (.NET Framework 4.7.2)
 ```
-## 업데이트 (2020.3.17) - None Build
+## 업데이트 (2020.4.21) - None Build
 ```
- 1) BbungBbang -> DonationView 화면 작성중
+  1) BbungBbang -> DonationView 화면 작성중
+				  ㄴ 엑셀 내보내기 기능 구현중 (엑셀 폼 작성중)
 ```
 ## 지난 업데이트 기록
 [기록 보기](./UPDATE.md)
